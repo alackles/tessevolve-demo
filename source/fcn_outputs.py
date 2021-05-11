@@ -22,20 +22,22 @@ header_row = ["x", "y", "z", "fitness"]
 # how many points to sample
 pts = 10
 
-
-### SHUBERT FUNCTION OUTPUT
-
 # ranges!
-shubert_x = np.linspace(start=-10, stop=10, num=pts)
-shubert_y = np.linspace(start=-10, stop=10, num=pts)
-shubert_z = np.linspace(start=-10, stop=10, num=pts)
 
-with open(shubert_file, 'w') as f:
-    shubert_writer = csv.writer(f, delimiter=",",quotechar='"')
-    shubert_writer.writerow(header_row)
-    for i in range(0, pts):
-        x = shubert_x[i]
-        y = shubert_y[i]
-        z = shubert_z[i]
-        fitness = shubert([x, y, z])
-        shubert_writer.writerow([x, y, z, fitness])
+shubert_range = np.linspace(start=-10, stop=10, num=pts)
+vincent_range = np.linspace(start = 0.25, stop=10.25, num=pts)
+
+fcn_range = {"shubert": shubert_range, "vincent": vincent_range}
+functions = [shubert, vincent]
+
+for fcn in functions:
+    fname = "../data/" + fcn.__name__ + ".csv"
+    frange = fcn_range[fcn.__name__]
+    with open(fname, 'w') as fname:
+        fcn_writer = csv.writer(fname, delimiter=",", quotechar='"')
+        fcn_writer.writerow(header_row)
+        for i in range(pts):
+            x = y = z = frange[i]
+            fitness = fcn([x, y, z])
+            fcn_writer.writerow([x, y, z, fitness])
+    
