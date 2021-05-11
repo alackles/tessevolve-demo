@@ -21,6 +21,10 @@ header_row = ["x", "y", "z", "fitness"]
 
 # how many points to sample
 pts = 10
+
+
+### SHUBERT FUNCTION OUTPUT
+
 # ranges!
 shubert_x = np.linspace(start=-10, stop=10, num=pts)
 shubert_y = np.linspace(start=-10, stop=10, num=pts)
