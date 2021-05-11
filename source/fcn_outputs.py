@@ -20,7 +20,7 @@ cf4_file = "../data/cf4.csv"
 header_row = ["x", "y", "z", "fitness"]
 
 # how many points to sample
-pts = 10
+pts = 1000
 
 # ranges!
 
