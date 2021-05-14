@@ -1,8 +1,8 @@
 # import functions from niching space
-from niching.python3.cec2013.functions import shubert
-from niching.python3.cec2013.functions import vincent
-from niching.python3.cec2013.CF3 import CF3
-from niching.python3.cec2013.CF4 import CF4
+from ..source.landscapes.functions import shubert
+from ..source.landscapes.functions import vincent
+from ..source.landscapes.CF3 import CF3
+from ..source.landscapes.CF4 import CF4
 
 # import other packages
 import numpy as np
@@ -10,10 +10,10 @@ import csv
 
 # filenames
 
-shubert_file = "../data/shubert.csv"
-vincent_file = "../data/vincent.csv"
-cf3_file = "../data/cf3.csv"
-cf4_file = "../data/cf4.csv"
+shubert_file = "../data/coords_shubert.csv"
+vincent_file = "../data/coords_vincent.csv"
+cf3_file = "../data/coords_cf3.csv"
+cf4_file = "../data/coords_cf4.csv"
 
 # other globals
 
