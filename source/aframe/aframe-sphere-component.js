@@ -81,15 +81,13 @@
 	    // Create geometry.
 	    this.geometry = new THREE.SphereGeometry({
 			radius: this.data.radius,
-			widthSegments: 6,
-			heightSegments: 6
+			widthSegments: 32,
+			heightSegments: 32
 		});
 	    this.geometry.vertices.push(new THREE.Vector3(0, 0, 0));
 	    // Create material.
 	    this.material = new THREE.MeshLambertMaterial({
 	      color: this.data.color,
-		  radius: this.data.radius,
-	      sizeAttenuation: this.data.perspective
 	    });
 	    // Create mesh.
 	    this.spheres = new THREE.Mesh(this.geometry, this.material);
