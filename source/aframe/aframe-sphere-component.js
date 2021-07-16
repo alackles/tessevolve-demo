@@ -90,19 +90,23 @@
 	      color: this.data.color,
 	    });
 	    // Create mesh.
-	    this.spheres = new THREE.Mesh(this.geometry, this.material);
+	    this.spheres = new THREE.Points(this.geometry, this.material);
 	    // Set mesh on entity.
 	    this.el.setObject3D('mesh', this.spheres);
 	  },
 
 	  setPoints: function (spheres) {
-	    this.geometry = new THREE.SphereGeometry();
+	    this.geometry = new THREE.SphereGeometry({
+			radius: this.data.radius,
+			widthSegments: 32,
+			heightSegments: 32
+		});
 	    var vertices = this.geometry.vertices;
 	    spheres.forEach(function (sphere) {
 	      vertices.push(new THREE.Vector3(sphere[0], sphere[1], sphere[2]));
 	    });
 	    // Create mesh.
-	    this.spheres = new THREE.Mesh(this.geometry, this.material);
+	    this.spheres = new THREE.Points(this.geometry, this.material);
 	    // Set mesh on entity.
 	    this.el.setObject3D('mesh', this.spheres);
 	  },
