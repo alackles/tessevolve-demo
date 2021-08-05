@@ -20,7 +20,7 @@ cf4_file = "../../data/coords_CF4.csv"
 header_row = ["x", "y", "z", "fitness"]
 
 # how many points to sample
-pts = 1000
+pts = 10
 
 # ranges!
 
@@ -45,9 +45,13 @@ for fcn in functions:
         fcn_writer = csv.writer(fname, delimiter=",", quotechar='"')
         fcn_writer.writerow(header_row)
         for i in range(pts):
-            x = y = z = frange[i]
-            if fcn in classes:
-                fitness = fcn(3).evaluate([x, y, z])
-            else:
-                fitness = fcn([x, y, z])
-            fcn_writer.writerow([x, y, z, fitness])
+            x = frange[i]
+            for j in range(pts):
+                y = frange[j]
+                for k in range(pts):
+                    z = frange[k]
+                    if fcn in classes:
+                        fitness = fcn(3).evaluate([x, y, z])
+                    else:
+                        fitness = fcn([x, y, z])
+                    fcn_writer.writerow([x, y, z, fitness])
