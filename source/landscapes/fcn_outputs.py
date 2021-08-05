@@ -45,13 +45,13 @@ for fcn in functions:
         fcn_writer = csv.writer(fname, delimiter=",", quotechar='"')
         fcn_writer.writerow(header_row)
         for i in range(pts):
-            x = frange[i]
+            x = round(frange[i],2)
             for j in range(pts):
-                y = frange[j]
+                y = round(frange[j],2)
                 for k in range(pts):
-                    z = frange[k]
+                    z = round(frange[k],2)
                     if fcn in classes:
-                        fitness = fcn(3).evaluate([x, y, z])
+                        fitness = round(fcn(3).evaluate([x, y, z]),2)
                     else:
-                        fitness = fcn([x, y, z])
+                        fitness = round(fcn([x, y, z]),2)
                     fcn_writer.writerow([x, y, z, fitness])
