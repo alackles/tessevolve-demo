@@ -1,6 +1,6 @@
 $.getScript("./landscape.js", function()
     {;
-        fname = "../../data/coords_CF4.csv";
+        fname = "../../data/coords_CF3.csv";
         fmin = -5000;
         fmax = 0;
 
