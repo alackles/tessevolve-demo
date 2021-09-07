@@ -25,14 +25,14 @@ var load_landscape = function(filename) {
         var min = d3.min(landscape, function(d) {return d.fitness});
         var max = d3.max(landscape, function(d) {return d.fitness});
 
-        console.log(min)
-        console.log(max)
+        //console.log(min)
+        //console.log(max)
 
-        var rScale = d3.scaleSqrt();
-        rScale.domain([min, max]).range([0, 5]);
+        //var rScale = d3.scaleSqrt();
+        //rScale.domain([min, max]).range([0, 5]);
     
-        var opScale = d3.scaleSqrt();
-        opScale.domain([min, max]).range([0.05, 1]);
+        //var opScale = d3.scaleSqrt();
+        //opScale.domain([min, max]).range([0.05, 1]);
 
         var colScale = d3.scaleSequential(d3.interpolatePlasma);
         colScale.domain([min, max])
