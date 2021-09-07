@@ -25,17 +25,19 @@ var load_landscape = function(filename) {
         var min = d3.min(landscape, function(d) {return d.fitness});
         var max = d3.max(landscape, function(d) {return d.fitness});
 
+        console.log(min)
+        console.log(max)
+
         var rScale = d3.scaleSqrt();
         rScale.domain([min, max]).range([0, 5]);
     
         var opScale = d3.scaleSqrt();
-        opScale.domain([min, max]).range([0.25, 0.75]);
+        opScale.domain([min, max]).range([0.05, 1]);
 
         pts.enter()
             .append('a-sphere')
             .attr('class', 'data_point')
             .attr('color', 'darkseagreen')
-            .attr('transparent', 'true')
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
             .attr('radius', function(d) {return rScale(d.fitness)})
             .attr('opacity', function(d) {return opScale(d.fitness)});
