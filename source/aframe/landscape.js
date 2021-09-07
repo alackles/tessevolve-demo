@@ -34,13 +34,16 @@ var load_landscape = function(filename) {
         var opScale = d3.scaleSqrt();
         opScale.domain([min, max]).range([0.05, 1]);
 
+        var colScale = d3.scaleSequential(d3.interpolatePlasma);
+        colScale.domain([min, max])
+
         pts.enter()
             .append('a-sphere')
             .attr('class', 'data_point')
-            .attr('color', 'darkseagreen')
+            .attr('color', function(d) {return colScale(d.fitness)})
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
-            .attr('radius', function(d) {return rScale(d.fitness)})
-            .attr('opacity', function(d) {return opScale(d.fitness)});
+            .attr('radius', 2)
+            .attr('opacity', 0.9);
         }
     )
 
