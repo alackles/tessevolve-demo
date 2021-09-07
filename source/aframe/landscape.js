@@ -11,16 +11,9 @@ var coords = function(x, y, z) {
     return x + " " + y + " " + z
 }
 
-var load_landscape = function(filename, min, max) {
+var load_landscape = function(filename) {
 
     var scene = d3.select('a-scene')
-
-    var rScale = d3.scaleSqrt();
-    rScale.domain([min, max]).range([0, 5]);
-
-    var opScale = d3.scaleSqrt();
-    opScale.domain([min, max]).range([0.25, 0.75]);
-
 
     d3.csv(filename, accessor)
     .then(
@@ -28,6 +21,15 @@ var load_landscape = function(filename, min, max) {
 
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x})
+
+        var min = d3.min(landscape, function(d) {return d.fitness});
+        var max = d3.max(landscape, function(d) {return d.fitness});
+
+        var rScale = d3.scaleSqrt();
+        rScale.domain([min, max]).range([0, 5]);
+    
+        var opScale = d3.scaleSqrt();
+        opScale.domain([min, max]).range([0.25, 0.75]);
 
         pts.enter()
             .append('a-sphere')
