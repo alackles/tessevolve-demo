@@ -19,12 +19,13 @@ cf4_file = "../../data/coords_CF4.csv"
 
 header_row = ["x", "y", "z", "fitness"]
 
-# how many points to sample
-pts = 10
+# how many points to sample per dimension
+# number of points generated is pts^3
+pts = 15
 
 # ranges!
 
-shubert_range = np.linspace(start=-10, stop=10, num=pts)
+shubert_range = np.linspace(start=-5, stop=5, num=pts)
 vincent_range = np.linspace(start = 0.25, stop=10.25, num=pts)
 cf3_range = np.linspace(start=-5, stop=5, num=pts)
 cf4_range = np.linspace(start=-5, stop=5, num=pts)
