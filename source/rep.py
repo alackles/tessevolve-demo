@@ -18,9 +18,9 @@ genfile = "./third-party/MABE2/settings/GECCO.gen"
 mabefile = "./third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
-lastrep = 100
+lastrep = 2
 fcns = {"Shubert": (-5, 5), 
-  "Vincent": {0.25, 10.25}, 
+  "Vincent": (0.25, 10.25), 
   "CF3": (-5, 5), 
   "CF4": (-5, 5)}
 
@@ -40,13 +40,14 @@ for fcn, minmax in fcns.items():
       Path(dirname).mkdir(parents=True, exist_ok=True)
 
       #variables 
-      fcn_var = 'eval_gecco.fcn_name=\\"' + fcn
-      min_var = 'vals_org.min_value=\\"' + str(minval)
-      max_var = 'vals_org.max_value=\\"' + str(maxval)
+      fcn_var = 'eval_gecco.fcn_name=\\"' + fcn + '\\"'
+      min_var = 'vals_org.min_value=\\"' + str(minval) + '\\"'
+      max_var = 'vals_org.max_value=\\"' + str(maxval) + '\\"'
 
       randseed_var = "random_seed=" + str(randseed)
       outpath_var = 'output.filename=\\"' + dirname + 'output.csv\\"'
-      genpath_var = 'eval_nkmixed.genome_file=\\"' + dirname + 'genome.csv\\"'
+      genpath_var = 'eval_gecco.genome_file=\\"' + dirname + 'genome.csv\\"'
 
-      settings = fcn_var + "\;" + min_var + "\;" + max_var + "\;" +randseed_var + "\;" + outpath_var + "\;" + genpath_var
+      settings = fcn_var + "\;" + min_var + "\;" + max_var + "\;" + randseed_var + "\;" + outpath_var + "\;" + genpath_var
+      print(settings)
       os.system(runpath + " -f " + mabefile + " -s " + settings)
