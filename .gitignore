@@ -3,3 +3,6 @@
 
 # pycache
 source/landscapes/__pycache__/
+
+# reps
+data/reps/

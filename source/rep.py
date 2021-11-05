@@ -18,7 +18,7 @@ genfile = "./third-party/MABE2/settings/GECCO.gen"
 mabefile = "./third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
-lastrep = 2
+lastrep = 100
 fcns = {"Shubert": (-5, 5), 
   "Vincent": (0.25, 10.25), 
   "CF3": (-5, 5), 
