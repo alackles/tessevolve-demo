@@ -13,12 +13,13 @@ from pathlib import Path
 buildpath = "./third-party/MABE2/build/"
 runpath = buildpath + "MABE"
 reppath = "../data/reps/"
+datpath = "./third-party/MABE2/source/tools/DataGECCO/"
 
 genfile = "./third-party/MABE2/settings/GECCO.gen"
 mabefile = "./third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
-lastrep = 100
+lastrep = 10
 fcns = {"Shubert": (-5, 5), 
   "Vincent": (0.25, 10.25), 
   "CF3": (-5, 5), 
@@ -45,9 +46,13 @@ for fcn, minmax in fcns.items():
       max_var = 'vals_org.max_value=\\"' + str(maxval) + '\\"'
 
       randseed_var = "random_seed=" + str(randseed)
+      datpath_var = 'eval_gecco.dat_path=\\"' + datpath + '\\"'
+
       outpath_var = 'output.filename=\\"' + dirname + 'output.csv\\"'
       genpath_var = 'eval_gecco.genome_file=\\"' + dirname + 'genome.csv\\"'
+      phylopath_var = 'sys.snapshot_file_root_name=\\"' + dirname + 'phylogeny\\"'
 
-      settings = fcn_var + "\;" + min_var + "\;" + max_var + "\;" + randseed_var + "\;" + outpath_var + "\;" + genpath_var
+
+      settings = fcn_var + "\;" + min_var + "\;" + max_var + "\;" + randseed_var + "\;" + datpath_var + "\;" + outpath_var + "\;" + genpath_var + "\;" + phylopath_var
       print(settings)
       os.system(runpath + " -f " + mabefile + " -s " + settings)
