@@ -2,6 +2,3 @@
 	path = source/third-party/MABE2
 	url = git@github.com:alackles/MABE2.git
   branch = eval-GECCO
-[submodule "source/third-party/alife-std-dev-python"]
-	path = source/third-party/alife-std-dev-python
-	url = git@github.com:alife-data-standards/alife-std-dev-python.git
