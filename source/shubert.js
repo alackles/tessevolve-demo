@@ -1,7 +1,8 @@
 $.getScript("./landscape.js", function()
     {;
-        fname = "../data/coords_shubert.csv";
-        load_landscape(fname);
+        landscape_file = "../data/coords_shubert.csv";
+        lod_file = "../data/reps/SEED_00__F_Shubert/lod.csv";
+        load_landscape(landscape_file, lod_file);
     }
 
 )
