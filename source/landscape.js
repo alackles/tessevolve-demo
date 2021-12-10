@@ -66,6 +66,7 @@ var load_landscape = function(filename1, filename2) {
         //    .attr('color', '#000')
         //    .attr('position', function(d) {return coords(d.x, d.y, d.z)})
 
+        /// this is super broken /////
         edges.enter()
             .append('a-entity')
             .attr('line')
