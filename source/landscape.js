@@ -8,6 +8,10 @@ var accessor_landscape = function(row) {
     }
 }
 
+// remove this
+// make a new function that turns the lod file into a single string
+// once you've done that, put it in meshline
+// and you should be good to go
 var accessor_data = function(row) {
     return {
         x1: +row.x1*10,
@@ -36,15 +40,16 @@ var load_landscape = function(filename1, filename2) {
         function(files) {
         landscape = files[0]
         lod = files[1]
+        console.log(lod)
 
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x})
         
-        //var nodes = scene.selectAll('a-box')
-        //    .data(lod, function(d){return d.id})
-
-        var edges = scene.selectAll('a-entity')
+        var nodes = scene.selectAll('a-box')
             .data(lod, function(d){return d.id})
+
+        var edges = scene.selectAll('.phylogeny')
+            .data(lod)
 
         var min = d3.min(landscape, function(d) {return d.fitness});
         var max = d3.max(landscape, function(d) {return d.fitness});
@@ -60,19 +65,20 @@ var load_landscape = function(filename1, filename2) {
             .attr('radius', 1)
             .attr('opacity', 0.9);
 
-        //nodes.enter()
-        //    .append('a-box')
-        //    .attr('class', 'phylo_node')
-        //    .attr('color', '#000')
-        //    .attr('position', function(d) {return coords(d.x, d.y, d.z)})
+        nodes.enter()
+            .append('a-box')
+            .attr('class', 'phylo_node')
+            .attr('color', '#000')
+            .attr('position', function(d) {return coords(d.x1, d.y1, d.z1)})
 
         /// this is super broken /////
         edges.enter()
             .append('a-entity')
-            .attr('line')
-            .attr('color', '#000')
-            .attr('start', function(d) {return coords(d.x1, d.y2, d.z2)})
-            .attr('end', function(d) {return coords(d.x2, d.y2, d.z2)})
+            .classed('phylogeny', true)
+            .attr('meshline', "linewidth: 20, path: -10 -10 -10, 40 2 100; color: #FFF")
+        //    .attr('color', '#000')
+        //    .attr('start', function(d) {return coords(d.x1, d.y2, d.z2)})
+        //    .attr('end', function(d) {return coords(d.x2, d.y2, d.z2)})
         }
     )
 

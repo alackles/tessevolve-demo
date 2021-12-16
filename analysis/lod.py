@@ -8,7 +8,7 @@ reppath = datapath + "reps/"
 
 firstrep = 0
 lastrep = 10
-fcns = ["Shubert", "CF3", "CF4"]
+fcns = ["Shubert", "Vincent", "CF3", "CF4"]
 
 digs = len(str(lastrep-firstrep))
 
