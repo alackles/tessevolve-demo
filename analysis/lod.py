@@ -3,6 +3,7 @@ import networkx as nx
 import math
 import csv
 import collections
+from decimal import Decimal
 
 datapath = "./../data/"
 reppath = datapath + "reps/"
@@ -22,6 +23,7 @@ for fcn in fcns:
         dirpath = reppath + "SEED_" + str(rep).rjust(2, '0') + "__F_" + fcn + "/" 
         filepath = dirpath + filename
         lodpath = dirpath + lodname 
+        edgepath = dirpath + edgename
 
         phylo = phylodev.load_phylogeny_to_networkx(filepath)
         extant_ids = phylodev.get_extant_taxa_ids(phylo, not_destroyed_value=math.inf)
@@ -38,3 +40,11 @@ for fcn in fcns:
             line = str(gen) + "," + vals + "\n"
             with open(lodpath, "a") as lod_file:
                 lod_file.write(line) 
+        
+        edge_list = ""
+        for vals in lod_chrono.values():
+            # multiply string values by 10 and convert back to string
+            vals = " ".join([str(Decimal(x)*10) for x in vals.lstrip('[ ').rstrip(' ]').split()])
+            edge_list = edge_list + vals + ","
+        with open(edgepath, "w") as edge_file:
+            edge_file.write(edge_list)
