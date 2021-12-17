@@ -1,4 +1,4 @@
-var accessor_landscape = function(row) {
+var accessor = function(row) {
     return {
         x: +row.x*10,
         y: +row.y*10,
@@ -12,17 +12,7 @@ var accessor_landscape = function(row) {
 // make a new function that turns the lod file into a single string
 // once you've done that, put it in meshline
 // and you should be good to go
-var accessor_data = function(row) {
-    return {
-        x1: +row.x1*10,
-        y1: +row.y1*10,
-        z1: +row.z1*10,
-        x2: +row.x2*10,
-        y2: +row.y2*10,
-        z2: +row.z2*10,
-        id: +row.id
-    }
-}
+
 
 var coords = function(x, y, z) {
     return x + " " + y + " " + z
@@ -33,8 +23,8 @@ var load_landscape = function(filename1, filename2) {
     var scene = d3.select('a-scene')
 
     Promise.all([
-        d3.csv(filename1, accessor_landscape),
-        d3.csv(filename2, accessor_data),
+        d3.csv(filename1, accessor),
+        d3.csv(filename2, accessor),
     ])
     .then(
         function(files) {
