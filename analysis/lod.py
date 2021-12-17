@@ -41,10 +41,10 @@ for fcn in fcns:
             with open(lodpath, "a") as lod_file:
                 lod_file.write(line) 
         
-        edge_list = ""
+        edge_list = []
         for vals in lod_chrono.values():
             # multiply string values by 10 and convert back to string
             vals = " ".join([str(Decimal(x)*10) for x in vals.lstrip('[ ').rstrip(' ]').split()])
-            edge_list = edge_list + vals + ","
+            edge_list.append(vals)
         with open(edgepath, "w") as edge_file:
-            edge_file.write(edge_list)
+            edge_file.write(",".join(edge_list))
