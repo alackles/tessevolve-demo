@@ -6,3 +6,7 @@ source/landscapes/__pycache__/
 
 # reps
 data/reps/
+
+#demo
+
+data/demo/demo.zip

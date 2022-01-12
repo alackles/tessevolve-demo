@@ -14,7 +14,7 @@ fcns = ["Shubert", "Vincent", "CF3", "CF4"]
 
 digs = len(str(lastrep-firstrep))
 
-filename = "phylogeny_10000.csv"
+filename = "phylogeny_100000.csv"
 lodname = "lod.csv"
 edgename = "edges.csv"
 
