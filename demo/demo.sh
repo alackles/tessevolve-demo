@@ -13,4 +13,4 @@
 #  because the demo has a different landing page
 
 rm demo.zip
-zip -r0 demo.zip ../source/*.html ../source/*.js ../data/*
+zip -r0 demo.zip ../source/*.html ../source/pages/*.js ../data/*

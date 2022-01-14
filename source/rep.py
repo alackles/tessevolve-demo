@@ -56,3 +56,5 @@ for fcn, minmax in fcns.items():
       settings = fcn_var + "\;" + min_var + "\;" + max_var + "\;" + randseed_var + "\;" + datpath_var + "\;" + outpath_var + "\;" + genpath_var + "\;" + phylopath_var
       print(settings)
       os.system(runpath + " -f " + mabefile + " -s " + settings)
+
+os.system("rm phylogenetic_diversity.csv")
