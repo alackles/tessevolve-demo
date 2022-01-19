@@ -9,18 +9,18 @@ datapath = "./../data/"
 reppath = datapath + "reps/"
 
 firstrep = 0
-lastrep = 10
+lastrep = 3
 fcns = ["Shubert", "Vincent", "CF3", "CF4"]
 
 digs = len(str(lastrep-firstrep))
 
-filename = "phylogeny_100000.csv"
+filename = "phylogeny_10000.csv"
 lodname = "lod.csv"
 edgename = "edges.csv"
 
 for fcn in fcns:
     for rep in range(firstrep, lastrep):
-        dirpath = reppath + "SEED_" + str(rep).rjust(2, '0') + "__F_" + fcn + "/" 
+        dirpath = reppath + "SEED_" + str(rep) + "__F_" + fcn + "/" 
         filepath = dirpath + filename
         lodpath = dirpath + lodname 
         edgepath = dirpath + edgename

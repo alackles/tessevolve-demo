@@ -19,7 +19,7 @@ genfile = "./third-party/MABE2/settings/GECCO.gen"
 mabefile = "./third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
-lastrep = 10
+lastrep = 3
 fcns = {"Shubert": (-5, 5), 
   "Vincent": (0.25, 10.25), 
   "CF3": (-5, 5), 
@@ -57,4 +57,4 @@ for fcn, minmax in fcns.items():
       print(settings)
       os.system(runpath + " -f " + mabefile + " -s " + settings)
 
-os.system("rm phylogenetic_diversity.csv")
+os.system("rm phylogenetic_data.csv")
