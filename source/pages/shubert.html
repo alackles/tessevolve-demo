@@ -7,10 +7,6 @@
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   <script src="https://raw.githack.com/andreasplesch/aframe-meshline-component/master/dist/aframe-meshline-component.min.js"></script>
   
-  <!-- camera/movement controls -->
-  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
-  <script src="https://unpkg.com/aframe-thumb-controls-component@1.1.0/dist/aframe-thumb-controls-component.min.js"></script>
-  
   <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -37,18 +33,13 @@
       <!-- Left Controller -->
       <a-entity 
       id="leftHand" 
-      hand-controls="hand: left; handModelStyle: lowPoly; color: #15ACCF" 
-      teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; collisionEntities: .data_point; curveShootingSpeed: 18; landingMaxAngle: 60" 
-      visible="true">
+      oculus-touch-controls="hand: left">
       </a-entity>
               
       <!-- Right Controller -->
       <a-entity 
       id="rightHand" 
-      hand-controls="hand: right; handModelStyle: lowPoly; color: #15ACCF" 
-      laser-controls raycaster="showLine: true; far: 10; interval: 0; objects: .clickable, a-link;" 
-      line="color: #7cfc00; opacity: 0.5" 
-      visible="true">
+      oculus-touch-controls="hand: right">
       </a-entity>
       
     </a-entity>
