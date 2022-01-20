@@ -31,10 +31,10 @@ var load_landscape = function(filename1, filename2, filename3) {
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x})
         
-        /*
+        
         var nodes = scene.selectAll('a-box')
             .data(lod, function(d){return d.id})
-        */
+        
 
         const meshline_param = 'linewidth: 20; path: ' + edges + '; color: #000'
 
@@ -47,6 +47,9 @@ var load_landscape = function(filename1, filename2, filename3) {
         var colScale = d3.scaleSequential(d3.interpolatePlasma);
         colScale.domain([min, max])
 
+        var phyloScale = d3.scaleSequential(d3.interpolateViridis);
+        phyloScale.domain([0, 10000])
+        
         pts.enter()
             .append('a-sphere')
             .attr('class', 'data_point')
@@ -54,13 +57,16 @@ var load_landscape = function(filename1, filename2, filename3) {
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
             .attr('radius', 1)
             .attr('opacity', 0.9);
-        /*
+        
         nodes.enter()
             .append('a-box')
             .attr('class', 'phylo_node')
-            .attr('color', '#000')
+            .attr('color', function (d) {return phyloScale(d.id)})
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
-        */
+            .attr('height', 0.2)
+            .attr('depth', 0.2)
+            .attr('width', 0.2)
+        
         }
     )
 
