@@ -16,6 +16,7 @@ digs = len(str(lastrep-firstrep))
 
 filename = "phylogeny_10000.csv"
 lodname = "lod.csv"
+genname = "genome.csv"
 edgename = "edges.csv"
 
 for fcn in fcns:
@@ -25,12 +26,13 @@ for fcn in fcns:
             filepath = dirpath + filename
             lodpath = dirpath + lodname 
             edgepath = dirpath + edgename
+            genpath = dirpath + genname
 
             phylo = phylodev.load_phylogeny_to_networkx(filepath)
             extant_ids = phylodev.get_extant_taxa_ids(phylo, not_destroyed_value=math.inf)
             lod = phylodev.extract_asexual_lineage(phylo, extant_ids[0])
 
-            # create line of descent 
+            # create line of descent: lod.csv
             lod_dict = dict(lod.nodes(data="taxon_info"))
             lod_chrono = collections.OrderedDict(sorted(lod_dict.items()))
             with open(lodpath, "w") as lod_file:
@@ -41,6 +43,7 @@ for fcn in fcns:
                 with open(lodpath, "a") as lod_file:
                     lod_file.write(line) 
         
+            # create single string for edges for meshline: edges.csv
             edge_list = []
             for vals in lod_chrono.values():
                 # multiply string values by 10 and convert back to string
@@ -49,4 +52,9 @@ for fcn in fcns:
             with open(edgepath, "w") as edge_file:
                 edge_file.write(",".join(edge_list))
             
+            # process file for nodes for colorings: genome.csv
+            with open("genome.csv", "r") as gen_file, open("temp.csv", "a") as temp_file:
+                temp_file.write("id,x,y,z,fitness\n")
+                for i, line in enumerate(gen_file):
+                    temp_file.write(str(i) + line)
             print(dirpath)
