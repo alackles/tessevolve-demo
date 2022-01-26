@@ -41,7 +41,7 @@ for fcn, minmax in fcns.items():
       for rep in range(firstrep, lastrep):
           # random seeds and folder creation
           randseed = rep
-          dirname = reppath + "SEED_" + str(randseed).rjust(digs, '0') + "__F_" + fcn + "__MUT_" + mutstr + "/" 
+          dirname = reppath + "SEED_" + str(randseed).rjust(digs, '0') + "__F_" + fcn + "__MUT_" + mutstr + "__T_" + tournystr + "/" 
           print(dirname)
           Path(dirname).mkdir(parents=True, exist_ok=True)
 
@@ -52,7 +52,7 @@ for fcn, minmax in fcns.items():
 
           mut_var = 'vals_org.mut_size=\\"' + str(mut) + '\\"'
           tourney_var = 'select_tourny.tournament_size=\\"' + str(tourneystr) + '\\"'
-          
+
           randseed_var = "random_seed=" + str(randseed)
           datpath_var = 'eval_gecco.dat_path=\\"' + datpath + '\\"'
 
