@@ -51,7 +51,7 @@ for fcn, minmax in fcns.items():
           max_var = 'vals_org.max_value=\\"' + str(maxval) + '\\"'
 
           mut_var = 'vals_org.mut_size=\\"' + str(mut) + '\\"'
-          tourney_var = 'select_tourny.tournament_size=\\"' + str(tourneystr) + '\\"'
+          tourney_var = 'select_tourny.tournament_size=\\"' + str(tourny) + '\\"'
 
           randseed_var = "random_seed=" + str(randseed)
           datpath_var = 'eval_gecco.dat_path=\\"' + datpath + '\\"'
