@@ -19,14 +19,17 @@ genfile = "./third-party/MABE2/settings/GECCO.gen"
 mabefile = "./third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
-lastrep = 10
-fcns = {"Shubert": (-5, 5), 
+lastrep = 1
+fcns = {
+  "Shubert": (-5, 5), 
   "Vincent": (0.25, 10.25), 
   "CF3": (-5, 5), 
-  "CF4": (-5, 5)}
+  "CF4": (-5, 5)
+  }
 mutrates = [0.1, 0.01, 0.001, 0.0001]
 tournament_sizes = [2, 4, 8, 16]
-digs = len(str(lastrep-firstrep))
+#digs = len(str(lastrep-firstrep))
+digs = 2
 
 # clean build of MABE
 os.system("cd " + buildpath + "&& make clean && make && cd ../../../")
@@ -59,10 +62,9 @@ for fcn, minmax in fcns.items():
           outpath_var = 'output.filename=\\"' + dirname + 'output.csv\\"'
           genpath_var = 'eval_gecco.genome_file=\\"' + dirname + 'genome.csv\\"'
           phylopath_var = 'sys.snapshot_file_root_name=\\"' + dirname + 'phylogeny\\"'
+          phylodatapath_var = 'sys.data_file_name=\\"' + dirname + 'phylogenetic_data.csv\\"'
 
 
-          settings = fcn_var + "\;" + min_var + "\;" + max_var + "\;" + mut_var + "\;" + randseed_var + "\;" + datpath_var + "\;" + outpath_var + "\;" + genpath_var + "\;" + phylopath_var
+          settings = fcn_var + "\;" + min_var + "\;" + max_var + "\;" + mut_var + "\;" + tourney_var +"\;" + randseed_var + "\;" + datpath_var + "\;" + outpath_var + "\;" + genpath_var + "\;" + phylopath_var + "\;" + phylodatapath_var 
           print(settings)
           os.system(runpath + " -f " + mabefile + " -s " + settings)
-
-os.system("rm phylogenetic_data.csv")
