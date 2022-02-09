@@ -19,12 +19,12 @@ genfile = "./third-party/MABE2/settings/GECCO.gen"
 mabefile = "./third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
-lastrep = 1
+lastrep = 10
 fcns = {
-#  "Shubert": (-5, 5), 
+  "Shubert": (-5, 5), 
 #  "Vincent": (0.25, 10.25), 
 #  "CF3": (-5, 5), 
-  "CF4": (-5, 5)
+#  "CF4": (-5, 5)
   }
 tournament_sizes = [2, 4, 8, 16]
 mutrates = [0.1, 0.01, 0.001, 0.0001]
@@ -54,9 +54,11 @@ for fcn, minmax in fcns.items():
             #variables 
             fcn_var = 'eval_gecco.fcn_name=\\"' + fcn + '\\"'
             dim_var = 'eval_gecco.dims=\\"' + str(dim) + '\\"'
+            vals_var = 'vals_org.N=\\"' + str(dim) + '\\"'
             min_var = 'vals_org.min_value=\\"' + str(minval) + '\\"'
             max_var = 'vals_org.max_value=\\"' + str(maxval) + '\\"'
 
+            mut_rate = 'vals_org.mut_prob=\\"' + str(1) + '\\"'
             mut_var = 'vals_org.mut_size=\\"' + str(mut) + '\\"'
             tourney_var = 'select_tourny.tournament_size=\\"' + str(tourny) + '\\"'
 
@@ -69,6 +71,6 @@ for fcn, minmax in fcns.items():
             phylodatapath_var = 'sys.data_file_name=\\"' + dirname + 'phylogenetic_data.csv\\"'
 
 
-            settings = fcn_var + "\;" + dim_var + "\;" + min_var + "\;" + max_var + "\;" + mut_var + "\;" + tourney_var +"\;" + randseed_var + "\;" + datpath_var + "\;" + outpath_var + "\;" + genpath_var + "\;" + phylopath_var + "\;" + phylodatapath_var 
+            settings = fcn_var + "\;" + dim_var + "\;" + vals_var + "\;" + min_var + "\;" + max_var + "\;" + mut_rate + "\;" + mut_var + "\;" + tourney_var +"\;" + randseed_var + "\;" + datpath_var + "\;" + outpath_var + "\;" + genpath_var + "\;" + phylopath_var + "\;" + phylodatapath_var 
             print(settings)
             os.system(runpath + " -f " + mabefile + " -s " + settings)
