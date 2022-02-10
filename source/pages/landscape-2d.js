@@ -2,6 +2,7 @@ var accessor = function(row) {
     return {
         x: +row.x*10,
         y: +row.y*10,
+        z: 0,
         fitness: +row.fitness,
         id: +row.id
     }
@@ -35,10 +36,10 @@ var load_landscape = function(filename1, filename2, filename3) {
             .data(lod, function(d){return d.id})
         
 
-        //const meshline_param = 'linewidth: 5; path: ' + edges + '; color: #000'
+        const meshline_param = 'linewidth: 5; path: ' + edges + '; color: #000'
 
-        //var lod = scene.append('a-entity')
-        //    .attr('meshline', meshline_param)
+        var lod = scene.append('a-entity')
+            .attr('meshline', meshline_param)
 
         var min = d3.min(landscape, function(d) {return d.fitness});
         var max = d3.max(landscape, function(d) {return d.fitness});
