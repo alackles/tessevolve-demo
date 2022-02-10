@@ -99,10 +99,13 @@
 						title="It's easiest to interpret these visualizations if you look at data from a single experimental treatment at a time. This control panel lets you select experimental treatments to view, and options for how you want the data displayed.">
 							Settings
 						</h3>	
-
+						
+						<!-- Data Selection column -->
 						<div class="row align-items-center">
 							<div class="col">
 									<h5>Data selection</h5>
+
+								<!-- Fitness landscape -->
 								<div class="input-group mb-3">
 									<div class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="left"
 									title="Which of the four fitness functions do you want to view data from?">
@@ -116,8 +119,7 @@
 									</select>
 								</div>
 
-			
-
+								<!-- Mutation rate -->
 								<div class="input-group mb-3" >
 									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
 									title="Mutations to x and y coordinates are chosen from a normal distribution. This number, scaled by the x and y domains of the function, determines the standard deviation of that function.">
@@ -131,6 +133,7 @@
 									</select>
 								</div>
 
+								<!-- Tournament size -->
 								<div class="input-group mb-3" >
 									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
 									title="In tournament selection, a number of individuals are randomly chosen from the population and the one with the highest fitness reproduces. This variable determines the number of individuals in these groups.">
@@ -146,9 +149,11 @@
 
 							</div> <!-- Closes column -->
 
+							<!-- Visualization options column-->
 							<div class="col">
 								<h5>Visualization options</h5>
 								
+								<!-- Dimensions -->
 								<div class="input-group mb-3" >
 									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
 									title="We visualize both 2D and 3D landscapes with the same scheme so you can compare the visualization. Select whether you want to see a 2D or 3D landscape.">
@@ -159,7 +164,8 @@
 										<option value="3" selected>3D</option>
 									</select>
 								</div>
-								                                                                                                                                                                                                                                                                 
+								            
+								<!-- Phylogeny detail level-->
 								<div class="input-group mb-3">
 									<div class="input-group-prepend" data-bs-toggle="tooltip" data-bs-placement="left"
 									title="How detailed do you want the phylogeny to be? Higher accuracy may be less interpetable or, in some cases, cause rendering problems.">
@@ -175,6 +181,7 @@
 									</select>
 								</div>
 
+								<!-- Replicate selector -->
 								<div class="input-group mb-3">
 									<div class="input-group-prepend" data-bs-toggle="tooltip" data-bs-placement="left"
 									title="Each condition has 10 replicates. Select the replicate number you want to view.">
@@ -196,6 +203,7 @@
 
 							</div> <!-- Closes column -->
 
+							<!-- Draw button -->
 							<div class="col center">
 								<button type="button" class="btn btn-primary btn-lg" onclick="" data-bs-toggle="tooltip" data-bs-placement="top"
 								title="Click to draw the data you've specified! You need to click this button every time you want to update what's being shown, because rendering takes a few seconds.">
@@ -203,7 +211,8 @@
 									<br><br>
 									<span>Draw</span>
 								</button>
-							</div> <!-- Closes column -->								
+							</div> <!-- Closes column -->	
+
 						</div> <!-- Close row -->
 					</div> <!-- Close card body -->
 				</div> <!-- Close card -->
@@ -216,9 +225,45 @@
 
 
   <!-- Make the scene that contains the actual data visualization -->
-	<a-scene id="scene" embedded camera-transform-controls="">
-      <!-- blank for now -->
-	</a-scene>
+  	<div id="scene"> <!-- Scene rapped in div-->
+		<a-scene embedded>
+
+			<!-- Sample sphere -->
+			<a-sphere position="0 0 0" color="red" radius="4"></a-sphere>
+			
+			<!-- Basic movement and teleportation  -->
+			<a-entity 
+			id="cameraRig" 
+			movement-controls="constrainToNavMesh: false; fly: true" 
+			navigator="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" 
+			position="25 25 25" 
+			rotation="0 0 0">
+			
+			<!-- camera -->
+			<a-entity 
+			id="head" 
+			camera="active: true" 
+			position="25 25.6 25" 
+			look-controls="pointerLockEnabled: true; reverseMouseDrag: true" >
+			</a-entity>
+			
+			<!-- Left Controller -->
+			<a-entity 
+			id="leftHand" 
+			oculus-touch-controls="hand: left">
+			</a-entity>
+					
+			<!-- Right Controller -->
+			<a-entity 
+			id="rightHand" 
+			oculus-touch-controls="hand: right">
+			</a-entity>
+			
+			</a-entity>
+
+		</a-scene>
+    </div> <!-- Close the scene -->
+
 
 </body>
 
