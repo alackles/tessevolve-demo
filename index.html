@@ -229,21 +229,21 @@
 		<a-scene embedded>
 
 			<!-- Sample sphere -->
-			<a-sphere position="0 0 0" color="red" radius="4"></a-sphere>
+			<a-sphere position="0 1.6 -10" color="red" radius="4"></a-sphere>
 			
 			<!-- Basic movement and teleportation  -->
 			<a-entity 
 			id="cameraRig" 
 			movement-controls="constrainToNavMesh: false; fly: true" 
 			navigator="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" 
-			position="25 25 25" 
+			position="0 0 0" 
 			rotation="0 0 0">
 			
 			<!-- camera -->
 			<a-entity 
 			id="head" 
 			camera="active: true" 
-			position="25 25.6 25" 
+			position="0 1.6 0" 
 			look-controls="pointerLockEnabled: true; reverseMouseDrag: true" >
 			</a-entity>
 			
@@ -259,7 +259,7 @@
 			oculus-touch-controls="hand: right">
 			</a-entity>
 			
-			</a-entity>
+			</a-entity> <!-- Close Camera Rig-->
 
 		</a-scene>
     </div> <!-- Close the scene -->
