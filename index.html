@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- Load A-Frame -->
-  <script src="source/js/aframe-v1.2.0.min.js"></script>
+ 	<script src="source/js/aframe-v1.2.0.min.js"></script>
 
 	<!-- Load stuff for bootstrap -->
 	<script src="source/js/jquery-3.6.0.min.js"></script>
@@ -14,12 +14,12 @@
 
 	<!-- Load stuff related to AFrame plugins -->
 	<script src="source/js/d3.v7.min.js"></script>
-  <script src="source/js/aframe-extras.min.js"></script>
-  <script src="source/js/aframe-meshline-component.min.js"></script>
+  	<script src="source/js/aframe-extras.min.js"></script>
+  	<script src="source/js/aframe-meshline-component.min.js"></script>
 
 	<!-- Load style sheets (for bootstrap and specific to this page) -->
 	<link rel="stylesheet" href="source/css/bootstrap.min.css">
-  <link rel="stylesheet" href="source/css/main.css">
+	<link rel="stylesheet" href="source/css/main.css">
 
 	<!-- Load icons -->
 	<link href="source/css/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
@@ -39,8 +39,7 @@
 	</svg>
 
   <!-- Make header -->
-	<div id="banner" class="jumbotron">
-
+	<div id="banner" class="bg-dark p-5 rounded-lg">
 		<div class="container-fluid">			
 			<div class="row justify-content-between">
 				<!-- Title -->
@@ -52,7 +51,7 @@
 					<div class="row justify-content-end">
 						<div class="col">
 							<!-- Settings button -->
-							<button class="btn btn-light btn-lg float-right" data-toggle="collapse" href="#settings_container" role="button" aria-expanded="false" aria-controls="settings_container" alt="Settings. Click here to choose some data to draw!">
+							<button class="btn btn-light btn-lg float-right" data-bs-toggle="collapse" href="#settings_container" role="button" aria-expanded="false" aria-controls="settings_container" alt="Settings. Click here to choose some data to draw!">
 								<span title="Settings" aria-hidden="true" class="oi oi-cog align-middle"></span>
 							</button>
 						</div>
@@ -60,13 +59,13 @@
 						<div class="col">
 							<!-- View visualization button -->
 							<button class="btn btn-light btn-lg float-right"  onclick="document.getElementById('scene').scrollIntoView();" role="button" aria-expanded="false" aria-controls="view visualization" alt="Center on visualization">
-								<span title="More information" aria-hidden="true" class="oi oi-eye align-middle"></span>
+								<span title="More information" aria-hidden="true" class="oi oi-eye align-self-center"></span>
 							</button>	
 						</div>
 
 						<div class="col">
 							<!-- Bring up FAQ button -->
-							<button class="btn btn-light btn-lg float-right" data-toggle="modal" data-target="#help" role="button" aria-expanded="false" aria-controls="help" alt="Need help? Have more questions?">
+							<button class="btn btn-light btn-lg float-right" data-bs-toggle="modal" data-bs-target="#help" role="button" aria-expanded="false" aria-controls="help" alt="Need help? Have more questions?">
 								<span title="More information" aria-hidden="true" class="oi oi-question-mark align-middle"></span>
 							</button>	
 						</div>
@@ -80,9 +79,11 @@
 		<p>
 			<br>
 			To try out this demo, click the settings button (to the right with the gear symbol) and select some data to draw.
+			<br><br>
 			If you have a compatible device (e.g. Oculus VR headset), you can display this visualization in virtual reality by scrolling down (or clicking on the button to the right with the eye icon) and clicking the grey goggles button.
 			In a standard web browser this button will open a full-screen version of the data visualization. However, for the web browser, this view has a more limited range of interaction options, so I recommend just clicking the eye button 
 			to center the visualization in your web browser.
+			<br><br>
 			Have fun! If you have questions or just want to talk about data visualization in VR, feel free to <a href="https://alackles.github.io/">contact me</a>!
 		</p>
 
@@ -103,11 +104,11 @@
 							<div class="col">
 									<h5>Data selection</h5>
 								<div class="input-group mb-3">
-									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
+									<div class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="left"
 									title="Which of the four fitness functions do you want to view data from?">
 										<label class="input-group-text" for="function"> Fitness landscape: </label>
 									</div>
-									<select id="problem" class="custom-select" name="problem">
+									<select id="function" class="form-select" name="function">
 										<option value="1" selected>Shubert</option>
 										<option value="2">Vincent</option>
 										<option value="3">Composition Function 3</option>
@@ -116,23 +117,13 @@
 								</div>
 
 			
-								<div class="input-group mb-3" >
-									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
-									title="We visualize both 2D and 3D landscapes with the same scheme so you can compare the visualization. Select whether you want to see a 2D or 3D landscape.">
-										<label class="input-group-text" for="dims"> Dimensions: </label>
-									</div>
-									<select id="selection" class="custom-select" name="dims">
-										<option value="2">2D</option>
-										<option value="3" selected>3D</option>
-									</select>
-								</div>
 
 								<div class="input-group mb-3" >
 									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
 									title="Mutations to x and y coordinates are chosen from a normal distribution. This number, scaled by the x and y domains of the function, determines the standard deviation of that function.">
 										<label class="input-group-text" for="mut_rate"> Mutation rate: </label>
 									</div>
-									<select id="mut_rate" class="custom-select" name="mut_rate">
+									<select id="mut_rate" class="form-select" name="mut_rate">
 										<option value="0.1">0.1</option>
 										<option value="0.01">0.01</option>
 										<option value="0.001">0.001</option>
@@ -143,9 +134,9 @@
 								<div class="input-group mb-3" >
 									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
 									title="In tournament selection, a number of individuals are randomly chosen from the population and the one with the highest fitness reproduces. This variable determines the number of individuals in these groups.">
-											<label class="input-group-text" for="tour_size"> Tournament size: </label>
+										<label class="input-group-text" for="tour_size"> Tournament size: </label>
 									</div>
-									<select id="tour_size" class="custom-select" name="tour_size">
+									<select id="tour_size" class="form-select" name="tour_size">
 										<option value="2">2</option>
 										<option value="4">4</option>
 										<option value="8">8</option>
@@ -157,30 +148,39 @@
 
 							<div class="col">
 								<h5>Visualization options</h5>
-								<div class="input-group mb-3 form-check form-check-inline" >
-									<label class="form-check-label" for="lines_checkbox" data-toggle="tooltip" data-placement="left"
-									title="Do you want to draw paths representing the complete history of lineages? (can get messy)"> Draw lineage paths? &nbsp; </label>
-									<input type="checkbox" class="form-check-input" id="lines_checkbox" name="lines_checkbox">
+								
+								<div class="input-group mb-3" >
+									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
+									title="We visualize both 2D and 3D landscapes with the same scheme so you can compare the visualization. Select whether you want to see a 2D or 3D landscape.">
+										<label class="input-group-text" for="dims"> Dimensions: </label>
+									</div>
+									<select id="selection" class="form-select" name="dims">
+										<option value="2">2D</option>
+										<option value="3" selected>3D</option>
+									</select>
 								</div>
-
-								<div class="input-group mb-3 form-check form-check-inline" >
-									<label class="form-check-label" for="starts_checkbox" data-toggle="tooltip" data-placement="left"
-									title="Draw white spheres on the landscape indicating the location of the earliest ancestor of each lineage."> Draw start points?&nbsp; </label>
-									<input type="checkbox" class="form-check-input" id="starts_checkbox" name="starts_checkbox">
-								</div>
-
-								<div class="input-group mb-3 form-check form-check-inline">
-									<label class="form-check-label" for="ends_checkbox" data-toggle="tooltip" data-placement="left"
-									title="Draw black spheres on the landscape indicating, for each lineage, the location of the last organism from that lineage."> Draw end points?&nbsp; </label>
-									<input type="checkbox" class="form-check-input" id="ends_checkbox" name="ends_checkbox">
+								                                                                                                                                                                                                                                                                 
+								<div class="input-group mb-3">
+									<div class="input-group-prepend" data-bs-toggle="tooltip" data-bs-placement="left"
+									title="How detailed do you want the phylogeny to be? Higher accuracy may be less interpetable or, in some cases, cause rendering problems.">
+										<label class="input-group-text" for="rep"> Phylogeny detail: </label>
+									</div>
+									<select id="rep" class="form-select" name="rep">
+										<option value="0">None (Landscape Only)</option>
+										<option value="1">Start/End Only</option>
+										<option value="2">Low Detail, Good Performance</option>
+										<option value="3">Medium Detail, Medium Performance</option>
+										<option value="4">High Detail, Poor Performance</option>
+										<option value="5">Complete, Performance Issues Likely</option>
+									</select>
 								</div>
 
 								<div class="input-group mb-3">
-									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
+									<div class="input-group-prepend" data-bs-toggle="tooltip" data-bs-placement="left"
 									title="Each condition has 10 replicates. Select the replicate number you want to view.">
 										<label class="input-group-text" for="rep"> Replicate to view: </label>
 									</div>
-									<select id="rep" class="custom-select" name="rep">
+									<select id="rep" class="form-select" name="rep">
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -190,16 +190,18 @@
 										<option value="7">7</option>
 										<option value="8">8</option>
 										<option value="9">9</option>
-										<option value="10">10</option>					
+										<option value="10">10</option>					                                                                  
 									</select>
 								</div>
 
 							</div> <!-- Closes column -->
 
 							<div class="col center">
-								<button type="button" class="btn btn-primary btn-lg" onclick="" data-toggle="tooltip" data-placement="top"
+								<button type="button" class="btn btn-primary btn-lg" onclick="" data-bs-toggle="tooltip" data-bs-placement="top"
 								title="Click to draw the data you've specified! You need to click this button every time you want to update what's being shown, because rendering takes a few seconds.">
-									<span class="oi oi-brush"></span><br>Draw
+									<span class="oi oi-brush"></span>
+									<br><br>
+									<span>Draw</span>
 								</button>
 							</div> <!-- Closes column -->								
 						</div> <!-- Close row -->
@@ -213,7 +215,7 @@
 	<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="oi oi-chevron-top"></span></a>
 
 
-	<!-- Make the scene that contains the actual data visualization -->
+  <!-- Make the scene that contains the actual data visualization -->
 	<a-scene id="scene" embedded camera-transform-controls="">
       <!-- blank for now -->
 	</a-scene>

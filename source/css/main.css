@@ -52,3 +52,10 @@ a-assets img {
     justify-content:center;
     align-items:center;
 }
+
+/* To center icons in buttons */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
