@@ -30,8 +30,9 @@ button span {
     text-align:center;
 }
 
-#scene {
-    height: 100%;    
+a-scene {
+    height: 500px;
+    width: 100%;    
 }
 
 a-assets img {
