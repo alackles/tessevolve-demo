@@ -30,12 +30,13 @@ button span {
     text-align:center;
 }
 
+/* This controls the div that wraps the scene*/
 #scene {
   height: 100%;
 }
 
+/* This controls the actual scene */
 a-scene {
-    display:flex;
     min-height: 100vh;
     width: 100%;    
 }
