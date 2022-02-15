@@ -30,8 +30,13 @@ button span {
     text-align:center;
 }
 
+#scene {
+  height: 100%;
+}
+
 a-scene {
-    height: 500px;
+    display:flex;
+    min-height: 100vh;
     width: 100%;    
 }
 
