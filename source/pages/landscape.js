@@ -1,3 +1,7 @@
+var landscape_file = "../../data/coords_shubert_3D.csv";
+var lod_file = "../../data/reps/SEED_09__F_Shubert__D_2__MUT_0001__T_16/lod.csv";
+var edges_file = "../../data/reps/SEED_09__F_Shubert__D_2__MUT_0001__T_16/edges.csv";
+
 var accessor = function(row) {
     return {
         x: +row.x*10,
@@ -19,27 +23,27 @@ var load_landscape = function(filename1, filename2, filename3) {
 
     Promise.all([
         d3.csv(filename1, accessor),
-        d3.csv(filename2, accessor),
-        d3.text(filename3)
+        //d3.csv(filename2, accessor),
+        //d3.text(filename3)
     ])
     .then(
         function(files) {
         landscape = files[0]
-        lod = files[1]
-        edges = files[2]
+        //lod = files[1]
+        //edges = files[2]
 
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x})
         
         
-        var nodes = scene.selectAll('a-box')
-            .data(lod, function(d){return d.id})
+        //var nodes = scene.selectAll('a-box')
+        //    .data(lod, function(d){return d.id})
         
 
-        const meshline_param = 'linewidth: 20; path: ' + edges + '; color: #000'
+        //const meshline_param = 'linewidth: 20; path: ' + edges + '; color: #000'
 
-        var lod = scene.append('a-entity')
-            .attr('meshline', meshline_param)
+        //var lod = scene.append('a-entity')
+        //    .attr('meshline', meshline_param)
 
         var min = d3.min(landscape, function(d) {return d.fitness});
         var max = d3.max(landscape, function(d) {return d.fitness});
@@ -58,14 +62,14 @@ var load_landscape = function(filename1, filename2, filename3) {
             .attr('radius', 1)
             .attr('opacity', 0.4);
         
-        nodes.enter()
+/*         nodes.enter()
             .append('a-box')
             .attr('class', 'phylo_node')
             .attr('color', function (d) {return phyloScale(d.id)})
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
             .attr('height', 0.2)
             .attr('depth', 0.2)
-            .attr('width', 0.2)
+            .attr('width', 0.2) */
         
         }
     )
@@ -74,3 +78,4 @@ var load_landscape = function(filename1, filename2, filename3) {
 
 
 
+load_landscape(landscape_file, lod_file, edges_file);

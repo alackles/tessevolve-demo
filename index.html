@@ -9,9 +9,6 @@
  	<script src="source/js/aframe-v1.2.0.min.js"></script>
 	<script src="source/js/aframe-extras.min.js"></script>
  	<script src="source/js/aframe-meshline-component.min.js"></script>
-
-	<!-- Load D3 -->	
-  <script src="source/js/d3.v7.min.js"></script>
 	
   <!-- Load stuff for bootstrap -->
 	<script src="source/js/jquery-3.6.0.min.js"></script>
@@ -227,44 +224,6 @@
   <!-- The AFrame scene can capture your mouse, so it's nice to have a scroll to top button -->
 	<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="oi oi-chevron-top"></span></a>
 
-
-  <!-- Make the scene that contains the actual data visualization -->
-  <div id="scene"> <!-- Scene rapped in div-->
-		<a-scene embedded>
-
-			<!-- Basic movement and teleportation  -->
-			<a-entity 
-			id="cameraRig" 
-			movement-controls="constrainToNavMesh: false; fly: true" 
-			navigator="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" 
-			position="0 0 0" 
-			rotation="0 0 0">
-			
-			  <!-- camera -->
-			  <a-entity 
-			  id="head" 
-			  camera="active: true" 
-			  position="0 1.6 0" 
-			  look-controls="pointerLockEnabled: true; reverseMouseDrag: true" >
-			  </a-entity>
-        
-			  <!-- Left Controller -->
-			  <a-entity 
-			  id="leftHand" 
-			  oculus-touch-controls="hand: left">
-			  </a-entity>
-        
-			  <!-- Right Controller -->
-			  <a-entity 
-			  id="rightHand" 
-			  oculus-touch-controls="hand: right">
-			  </a-entity>
-        
-			</a-entity> <!-- Close Camera Rig-->
-
-		</a-scene> 
-  </div> <!-- Close the scene -->
-
   <!-- The modal containing the FAQ (this could go anywhere) -->
 	<div class="modal fade" id="faq" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -308,8 +267,48 @@
 		</div>
 	</div>
 
-<!-- Load actual data -->
-<script src="source/pages/landscape.js"></script>
+  <!-- Make the scene that contains the actual data visualization -->
+  <div id="scene"> <!-- Scene rapped in div-->
+		<a-scene embedded>
+      <a-box position="0 1.6 -10" color="red"></a-box>
+			<!-- Basic movement and teleportation  -->
+			<a-entity 
+			id="cameraRig" 
+			movement-controls="constrainToNavMesh: false; fly: true" 
+			navigator="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" 
+			position="0 0 0" 
+			rotation="0 0 0">
+			
+			  <!-- camera -->
+			  <a-entity 
+			  id="head" 
+			  camera="active: true" 
+			  position="0 1.6 0" 
+			  look-controls="pointerLockEnabled: true; reverseMouseDrag: true" >
+			  </a-entity>
+        
+			  <!-- Left Controller -->
+			  <a-entity 
+			  id="leftHand" 
+			  oculus-touch-controls="hand: left">
+			  </a-entity>
+        
+			  <!-- Right Controller -->
+			  <a-entity 
+			  id="rightHand" 
+			  oculus-touch-controls="hand: right">
+			  </a-entity>
+        
+			</a-entity> <!-- Close Camera Rig-->
+
+		</a-scene> 
+  </div> <!-- Close the scene -->
+
+	<!-- Load D3 -->
+  <script src="source/js/d3.v7.min.js"></script>
+
+  <!-- Load actual data -->
+  <script src="source/pages/landscape.js"></script>
 
 </body>
 
