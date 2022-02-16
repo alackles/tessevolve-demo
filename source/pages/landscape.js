@@ -54,10 +54,11 @@ var reload = function() {
 var load_landscape = function() {
     
     var seed = document.querySelector('select[name="rep"]').value;
-    var fcn = document.querySelector('select[name="function"').value;
-    var dim = document.querySelector('select[name="dim"').value;
+    var fcn = document.querySelector('select[name="function"]').value;
+    var dim = document.querySelector('select[name="dim"]').value;
     var mutrate = document.querySelector('select[name="mut_rate"]').value;
     var tourny = document.querySelector('select[name="tour_size"]').value;
+    var phylo_detail = document.querySelector('select[name="phylo"]').value;
 
     var basepath = "../../data/"
     var coord_data = basepath + "coords_" + fcn + "_" + dim + "D.csv";
@@ -89,18 +90,19 @@ var load_landscape = function() {
         lod = files[1]
         edges = files[2]
 
+        const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
+        
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x})
         
-        var nodes = scene.selectAll('a-box')
-            .data(lod, function(d){return d.id})
+        if (phylo_detail !== "0") {
+          var nodes = scene.selectAll('a-box')
+              .data(lod, function(d){return d.id})
         
-        const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
-
-        var lod = scene.append('a-entity')
+          var lod = scene.append('a-entity')
             .attr('id', "phyloLine")
             .attr('meshline', meshline_param)
-        
+        }
 
         var min = d3.min(landscape, function(d) {return d.fitness});
         var max = d3.max(landscape, function(d) {return d.fitness});
