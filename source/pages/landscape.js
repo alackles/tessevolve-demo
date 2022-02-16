@@ -1,6 +1,4 @@
-var landscape_file = "../../data/coords_shubert_3D.csv";
-var lod_file = "../../data/reps/SEED_09__F_Shubert__D_2__MUT_0001__T_16/lod.csv";
-var edges_file = "../../data/reps/SEED_09__F_Shubert__D_2__MUT_0001__T_16/edges.csv";
+// TODO: Vincent cmaera rig should be 25 25 25 
 
 var accessor = function(row) {
     return {
