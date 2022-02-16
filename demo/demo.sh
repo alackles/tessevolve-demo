@@ -8,9 +8,6 @@
 #  rest of the files, and also to sync the latest changes
 #  in here with the demo hosted at 
 #  https://alackles.github.io/landscapes
-# 
-# It does NOT include the index.html
-#  because the demo has a different landing page
 
 rm demo.zip
-zip -r0 demo.zip ../source/pages/* ../source/js/* ../data/*
+zip -r0 demo.zip index.html ../source/pages/landscape.js ../source/js/* ../source/css/* ../data/reps/*/edges.csv ../data/reps/*/lod.csv 
