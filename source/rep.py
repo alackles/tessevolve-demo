@@ -22,9 +22,9 @@ firstrep = 0
 lastrep = 10
 fcns = {
   "Shubert": (-5, 5), 
-#  "Vincent": (0.25, 10.25), 
-#  "CF3": (-5, 5), 
-#  "CF4": (-5, 5)
+  "Vincent": (0.25, 10.25), 
+  "CF3": (-5, 5), 
+  "CF4": (-5, 5)
   }
 tournament_sizes = [2, 4, 8, 16]
 mutrates = [0.1, 0.01, 0.001, 0.0001]
