@@ -65,7 +65,7 @@
 
 						<div class="col">
 							<!-- Bring up FAQ button -->
-							<button class="btn btn-light btn-lg float-right" data-bs-toggle="modal" data-bs-target="#help" role="button" aria-expanded="false" aria-controls="help" alt="Need help? Have more questions?">
+							<button class="btn btn-light btn-lg float-right" data-bs-toggle="modal" data-bs-target="#faq" role="button" aria-expanded="false" aria-controls="faq" alt="Need help? Have more questions?">
 								<span title="More information" aria-hidden="true" class="oi oi-question-mark align-middle"></span>
 							</button>	
 						</div>
@@ -226,7 +226,7 @@
 
 
   <!-- Make the scene that contains the actual data visualization -->
-  	<div id="scene"> <!-- Scene rapped in div-->
+  <div id="scene"> <!-- Scene rapped in div-->
 		<a-scene embedded>
 
 			<!-- Sample sphere -->
@@ -240,30 +240,73 @@
 			position="0 0 0" 
 			rotation="0 0 0">
 			
-			<!-- camera -->
-			<a-entity 
-			id="head" 
-			camera="active: true" 
-			position="0 1.6 0" 
-			look-controls="pointerLockEnabled: true; reverseMouseDrag: true" >
-			</a-entity>
-			
-			<!-- Left Controller -->
-			<a-entity 
-			id="leftHand" 
-			oculus-touch-controls="hand: left">
-			</a-entity>
-					
-			<!-- Right Controller -->
-			<a-entity 
-			id="rightHand" 
-			oculus-touch-controls="hand: right">
-			</a-entity>
-			
+			  <!-- camera -->
+			  <a-entity 
+			  id="head" 
+			  camera="active: true" 
+			  position="0 1.6 0" 
+			  look-controls="pointerLockEnabled: true; reverseMouseDrag: true" >
+			  </a-entity>
+        
+			  <!-- Left Controller -->
+			  <a-entity 
+			  id="leftHand" 
+			  oculus-touch-controls="hand: left">
+			  </a-entity>
+        
+			  <!-- Right Controller -->
+			  <a-entity 
+			  id="rightHand" 
+			  oculus-touch-controls="hand: right">
+			  </a-entity>
+        
 			</a-entity> <!-- Close Camera Rig-->
 
-		</a-scene>
-    </div> <!-- Close the scene -->
+		</a-scene> 
+  </div> <!-- Close the scene -->
+
+  <!-- The modal containing the FAQ (this could go anywhere) -->
+	<div class="modal fade" id="faq" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title">FAQ</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+          <h4> More FAQ details to come.</h4>
+          <p>
+            Put more details here when they're ready
+          </p>
+          <h4> What tools did you use to build this? </h4>
+					<p>
+					For full details, see <a href="https://github.com/alackles/project-viz-3D">the GitHub repo for this site</a>. In summary:
+					<li><a href="https://aframe.io/">A-Frame (v1.2.0)</a>: an open source and shockingly straightforward web framework for virtual reality. </li>
+					<li><a href="https://d3js.org/">D3.js (v7)</a>: an open source, easy-to-use JavaScript library for data-driven HTML, which was absolutely invaluable for programatically creating the landscapes you see. </li>
+					<li><a href="https://getbootstrap.com">Bootstrap (v5)</a>: an open source web framework to connect the front-end to the back-end, which I used to make this website. </li>
+					<li><a href="https://useiconic.com/open/">Open Iconic</a>: open source icons which I used for the buttons on this site. </li>
+					</p>
+
+					<h4>Who else helped make this happen?</h4>
+					<p>
+						This work builds directly on Emily Dolson's previous work on <a href="https://dl.acm.org/doi/pdf/10.1145/3205651.3208301">visualizing 2D landscapes in 3D</a>; the template for this website comes from <a href="https://emilydolson.github.io/fitness_landscape_visualizations/">her demo site</a> for that paper.
+            I'm additionally thankful to Charles Ofria, Clifford Bohm, and Vincent Ragusa for helpful discussions on this project.
+					</p>
+
+					<h4>Who are you?</h4>
+					<p>
+					I'm a PhD student creating methods and metrics to understand evolution at different scales. 
+          To learn more about me, see <a href="http://github.alackles.io"> my website</a>.
+					</p>
+	
+				</div>
+				<div class="modal-footer">
+					<a href="https://twitter.com/alackles" class="twitter-follow-button" data-show-count="false">Follow me on Twitter!</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> </li>
+					<a class="github-button" href="https://github.com/alackles" data-style="mega" aria-label="My Github">My Github</a> </li>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 </body>
