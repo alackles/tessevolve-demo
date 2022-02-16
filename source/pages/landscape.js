@@ -17,8 +17,10 @@ var coords = function(x, y, z) {
     return x + " " + y + " " + z
 }
 
-var load_landscape = function(filename1, filename2, filename3) {
+var load_landscape = function() {
 
+    var fcn = document.querySelector('select[name="function"').value;
+    var filename1 = "../../data/coords_" + fcn + "_3D.csv";
     var scene = d3.select('a-scene')
 
     Promise.all([
@@ -60,7 +62,7 @@ var load_landscape = function(filename1, filename2, filename3) {
             .attr('color', function(d) {return colScale(d.fitness)})
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
             .attr('radius', 1)
-            .attr('opacity', 0.4);
+            .attr('opacity', 1);
         
 /*         nodes.enter()
             .append('a-box')
@@ -78,4 +80,4 @@ var load_landscape = function(filename1, filename2, filename3) {
 
 
 
-load_landscape(landscape_file, lod_file, edges_file);
+load_landscape();
