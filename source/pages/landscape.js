@@ -38,7 +38,17 @@ var reload = function() {
         spheres[i].parentNode.removeChild(spheres[i]);
     }
 
-    // TODO: As you add elements, remove them when you need to
+    // Remove LOD nodes
+    var boxes = document.querySelectorAll("a-box");
+    for (var i = 0; i < boxes.length; i++) {
+        boxes[i].parentNode.removeChild(boxes[i]);
+    }
+
+    // Remove meshline
+    var phyloLine = document.getElementById('phyloLine')
+    if (phyloLine !== null) {
+      phyloLine.parentNode.removeChild(phyloLine);
+    }
 }
 
 var load_landscape = function() {
@@ -52,43 +62,45 @@ var load_landscape = function() {
     var basepath = "../../data/"
     var coord_data = basepath + "coords_" + fcn + "_" + dim + "D.csv";
 
-    //var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny;
-    //var node_data = replicate_path + "lod.csv"
-    //var edge_data = replicate_path + "edges.csv"
+    var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
+    var node_data = replicate_path + "lod.csv"
+    var edge_data = replicate_path + "edges.csv"
 
     var scene = d3.select('a-scene')
 
     if (dim == 3) {
       d3_coord_data = d3.csv(coord_data, accessor_3D);
-      //d3_node_data = d3.csv(node_data, accessor_3D);
+      d3_node_data = d3.csv(node_data, accessor_3D);
+      d3_edge_data = d3.csv(edge_data, accessor_3D)
     } else if (dim == 2) {
       d3_coord_data = d3.csv(coord_data, accessor_2D);
-      //d3_node_data = d3.csv(node_data, accessor_2D);
+      d3_node_data = d3.csv(node_data, accessor_2D);
+      d3_edge_data = d3.csv(edge_data, accessor_2D);
     }
 
     Promise.all([
         d3_coord_data,
-        //d3.csv(filename2, accessor),
-        //d3.text(filename3)
+        d3_node_data,
+        d3_edge_data
     ])
     .then(
         function(files) {
         landscape = files[0]
-        //lod = files[1]
-        //edges = files[2]
+        lod = files[1]
+        edges = files[2]
 
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x})
         
+        var nodes = scene.selectAll('a-box')
+            .data(lod, function(d){return d.id})
         
-        //var nodes = scene.selectAll('a-box')
-        //    .data(lod, function(d){return d.id})
+        const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
+
+        var lod = scene.append('a-entity')
+            .attr('id', "phyloLine")
+            .attr('meshline', meshline_param)
         
-
-        //const meshline_param = 'linewidth: 20; path: ' + edges + '; color: #000'
-
-        //var lod = scene.append('a-entity')
-        //    .attr('meshline', meshline_param)
 
         var min = d3.min(landscape, function(d) {return d.fitness});
         var max = d3.max(landscape, function(d) {return d.fitness});
@@ -105,16 +117,16 @@ var load_landscape = function() {
             .attr('color', function(d) {return colScale(d.fitness)})
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
             .attr('radius', 1)
-            .attr('opacity', 1);
+            .attr('opacity', 0.9);
         
-/*         nodes.enter()
+         nodes.enter()
             .append('a-box')
             .attr('class', 'phylo_node')
             .attr('color', function (d) {return phyloScale(d.id)})
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
             .attr('height', 0.2)
             .attr('depth', 0.2)
-            .attr('width', 0.2) */
+            .attr('width', 0.2) 
         
         }
     )
