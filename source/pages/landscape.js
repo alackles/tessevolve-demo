@@ -71,11 +71,11 @@ var load_landscape = function() {
     if (dim == 3) {
       d3_coord_data = d3.csv(coord_data, accessor_3D);
       d3_node_data = d3.csv(node_data, accessor_3D);
-      d3_edge_data = d3.csv(edge_data, accessor_3D)
+      d3_edge_data = d3.text(edge_data)
     } else if (dim == 2) {
       d3_coord_data = d3.csv(coord_data, accessor_2D);
       d3_node_data = d3.csv(node_data, accessor_2D);
-      d3_edge_data = d3.csv(edge_data, accessor_2D);
+      d3_edge_data = d3.text(edge_data);
     }
 
     Promise.all([
