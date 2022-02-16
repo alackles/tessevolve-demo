@@ -15,7 +15,24 @@ var coords = function(x, y, z) {
     return x + " " + y + " " + z
 }
 
+var reload = function() {
+    // Remove default text if it's there 
+    var defaultText = document.getElementById('defaultText');
+    if (defaultText !== null) {
+      defaultText.parentNode.removeChild(defaultText);
+    }
+
+    // Remove previous landscape
+    var spheres = document.querySelectorAll("a-sphere");
+    for (var i = 0; i < spheres.length; i++) {
+        spheres[i].parentNode.removeChild(spheres[i]);
+    }
+
+    // TODO: As you add elements, remove them when you need to
+}
+
 var load_landscape = function() {
+
 
     var fcn = document.querySelector('select[name="function"').value;
     var filename1 = "../../data/coords_" + fcn + "_3D.csv";
@@ -76,6 +93,7 @@ var load_landscape = function() {
 
 }
 
-
-
-load_landscape();
+var draw = function() {
+  reload();
+  load_landscape();
+}
