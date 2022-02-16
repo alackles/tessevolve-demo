@@ -1,6 +1,6 @@
 // TODO: Vincent cmaera rig should be 25 25 25 
 
-var accessor = function(row) {
+var accessor_3D = function(row) {
     return {
         x: +row.x*10,
         y: +row.y*10,
@@ -8,6 +8,16 @@ var accessor = function(row) {
         fitness: +row.fitness,
         id: +row.id
     }
+}
+
+var accessor_2D = function(row) {
+  return {
+      x: +row.x*10,
+      y: +row.y*10,
+      z: 0,
+      fitness: +row.fitness,
+      id: +row.id
+  }
 }
 
 
@@ -32,14 +42,32 @@ var reload = function() {
 }
 
 var load_landscape = function() {
-
-
+    
+    var seed = document.querySelector('select[name="rep"]').value;
     var fcn = document.querySelector('select[name="function"').value;
-    var filename1 = "../../data/coords_" + fcn + "_3D.csv";
+    var dim = document.querySelector('select[name="dim"').value;
+    var mutrate = document.querySelector('select[name="mut_rate"]').value;
+    var tourny = document.querySelector('select[name="tour_size"]').value;
+
+    var basepath = "../../data/"
+    var coord_data = basepath + "coords_" + fcn + "_" + dim + "D.csv";
+
+    //var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny;
+    //var node_data = replicate_path + "lod.csv"
+    //var edge_data = replicate_path + "edges.csv"
+
     var scene = d3.select('a-scene')
 
+    if (dim == 3) {
+      d3_coord_data = d3.csv(coord_data, accessor_3D);
+      //d3_node_data = d3.csv(node_data, accessor_3D);
+    } else if (dim == 2) {
+      d3_coord_data = d3.csv(coord_data, accessor_2D);
+      //d3_node_data = d3.csv(node_data, accessor_2D);
+    }
+
     Promise.all([
-        d3.csv(filename1, accessor),
+        d3_coord_data,
         //d3.csv(filename2, accessor),
         //d3.text(filename3)
     ])
