@@ -62,6 +62,8 @@ def lod_gen(dims, first=0, last=10):
     genname = "genome.csv"
     edgename = "edges.csv"
 
+    # TODO: Change to itertools? 
+
     for fcn in fcns:
         for mut in mutrates:
             for t in tournament_sizes:
