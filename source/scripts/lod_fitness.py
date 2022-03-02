@@ -4,8 +4,8 @@
 
 from pylandscapes.functions import shubert
 from pylandscapes.functions import vincent
-from pylandscapes.CF1 import CF1
-from pylandscapes.CF2 import CF2
+from pylandscapes.cfunctions import CF1
+from pylandscapes.cfunctions import CF2
 import inspect
 import itertools as it
 
@@ -22,7 +22,7 @@ def main():
     first = 0
     last = 2
 
-    datapath = "./../data/"
+    datapath = "./../../data/"
     reppath = datapath + "reps/"
 
     lodname = "lod.csv"

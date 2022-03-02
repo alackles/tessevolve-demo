@@ -53,7 +53,7 @@ def main():
     first = 0
     last = 2
 
-    datapath = "./../data/"
+    datapath = "./../../data/"
     reppath = datapath + "reps/"
 
     filename = "phylogeny_1000.csv"
