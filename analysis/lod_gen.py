@@ -1,5 +1,4 @@
 import ALifeStdDev.phylogeny as phylodev
-#import networkx as nx
 import math
 import collections
 from decimal import Decimal
