@@ -59,7 +59,6 @@ def lod_gen(dims, first=0, last=10):
 
     filename = "phylogeny_1000.csv"
     lodname = "lod.csv"
-    genname = "genome.csv"
     edgename = "edges.csv"
 
     # TODO: Change to itertools? 
