@@ -23,7 +23,7 @@ def export_lod(lod, dims, lodpath="lod.csv"):
 
     with open(lodpath, "w") as lod_file:
         xcoords = ",".join(["x" + str(d) for d in range(dims)])
-        lod_file.write("id" + xcoords + "\n")
+        lod_file.write("id," + xcoords + "\n")
 
     for gen, vals in lod.items():
         vals = ",".join(vals.lstrip('[ ').rstrip(' ]').split())

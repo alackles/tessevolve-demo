@@ -1,25 +1,15 @@
 // TODO: Vincent cmaera rig should be 25 25 25 
 
-var accessor_3D = function(row) {
+var accessor = function(row) {
     return {
-        x: +row.x*10,
-        y: +row.y*10,
-        z: +row.z*10,
+        x0: +row.x0*10,
+        x1: +row.x1*10,
+        x2: +row.x2*10,
+        x3: + row.x3*10,
         fitness: +row.fitness,
         id: +row.id
     }
 }
-
-var accessor_2D = function(row) {
-  return {
-      x: +row.x*10,
-      y: +row.y*10,
-      z: 0,
-      fitness: +row.fitness,
-      id: +row.id
-  }
-}
-
 
 var coords = function(x, y, z) {
     return x + " " + y + " " + z
@@ -69,15 +59,9 @@ var load_landscape = function() {
 
     var scene = d3.select('a-scene')
 
-    if (dim == 3) {
-      d3_coord_data = d3.csv(coord_data, accessor_3D);
-      d3_node_data = d3.csv(node_data, accessor_3D);
-      d3_edge_data = d3.text(edge_data)
-    } else if (dim == 2) {
-      d3_coord_data = d3.csv(coord_data, accessor_2D);
-      d3_node_data = d3.csv(node_data, accessor_2D);
-      d3_edge_data = d3.text(edge_data);
-    }
+    d3_coord_data = d3.csv(coord_data, accessor);
+    d3_node_data = d3.csv(node_data, accessor);
+    d3_edge_data = d3.text(edge_data)
 
     Promise.all([
         d3_coord_data,
