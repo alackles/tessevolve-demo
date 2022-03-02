@@ -5,7 +5,7 @@
 #
 #  @file  rep.py
 #  @brief Quick & dirty way to run multiple replicates in MABE and save the data.
-#
+#  TODO: parallelize (or just extend into an actual MABE2 functionality)
 
 import os
 from pathlib import Path 
@@ -19,21 +19,20 @@ genfile = "./third-party/MABE2/settings/GECCO.gen"
 mabefile = "./third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
-lastrep = 10
+lastrep = 2
 fcns = {
   "Shubert": (-5, 5), 
   "Vincent": (0.25, 10.25), 
-  "CF3": (-5, 5), 
-  "CF4": (-5, 5)
+  "CF1": (-5, 5), 
+  "CF2": (-5, 5)
   }
 tournament_sizes = [2, 4, 8, 16]
 mutrates = [0.1, 0.01, 0.001, 0.0001]
-dims = [2, 3]
-#digs = len(str(lastrep-firstrep))
+dims = [2, 3, 4]
 digs = 2
 
 # clean build of MABE
-#os.system("cd " + buildpath + "&& make clean && make && cd ../../../")
+os.system("cd " + buildpath + "&& make clean && make && cd ../../../")
 
 for fcn, minmax in fcns.items():
   minval = minmax[0]
