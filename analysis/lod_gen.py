@@ -1,6 +1,7 @@
 import ALifeStdDev.phylogeny as phylodev
 import math
 import collections
+import itertools as it
 from decimal import Decimal
 
 
@@ -46,35 +47,40 @@ def export_edges(lod, edgepath="edges.csv"):
     with open(edgepath, "w") as edge_file:
         edge_file.write(",".join(edge_list))
 
-# Combine the previous functions to repeat over all the replicates 
-def lod_gen(dims, first=0, last=10):
+def main():
+
+    # reps
+    first = 0
+    last = 2
 
     datapath = "./../data/"
     reppath = datapath + "reps/"
-
-    fcns = ["Shubert", "Vincent", "CF1", "CF2"]
-    mutrates = ["01", "001", "0001", "00001"]
-    tournament_sizes = [2, 4, 8, 16]
 
     filename = "phylogeny_1000.csv"
     lodname = "lod.csv"
     edgename = "edges.csv"
 
-    # TODO: Change to itertools? 
+    reps = [str(x).rjust(2, '0') for x in range(first, last)]
+    fcns = ["Shubert", "Vincent", "CF1", "CF2"]
+    dims = ["2", "3", "4"]
+    mutrates = ["01", "001", "0001", "00001"]
+    tournament_sizes = ["02", "04", "08", "16"]
 
-    for fcn in fcns:
-        for mut in mutrates:
-            for t in tournament_sizes:
-                for rep in range(first, last):
-                    dirpath = reppath + "SEED_" + str(rep).rjust(2, '0') + "__F_" + fcn + "__D_" + str(dims) + "__MUT_" + mut + "__T_" + str(t).rjust(2, '0') + "/" 
-                    filepath = dirpath + filename
-                    lodpath = dirpath + lodname 
-                    edgepath = dirpath + edgename
+    parameters = it.product(reps, fcns, dims, mutrates, tournament_sizes)
+    for param in parameters:
+        rep, fcn, dim, mutrate, tourny = param
+        parampath = "SEED_" + rep + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/"
+        dirpath = reppath + parampath 
+        filepath = dirpath + filename
+        lodpath = dirpath + lodname 
+        edgepath = dirpath + edgename
 
-                    lod = lod_dict_from_phylo(filepath)
-                    export_lod(lod, dims, lodpath)
-                    export_edges(lod, edgepath)
+        lod = lod_dict_from_phylo(filepath)
+        export_lod(lod, int(dim), lodpath)
+        export_edges(lod, edgepath)
+    
+    
 
-lod_gen(2, last=2)
-lod_gen(3, last=2)
-lod_gen(4, last=2)
+if __name__=="__main__":
+    main()
+
