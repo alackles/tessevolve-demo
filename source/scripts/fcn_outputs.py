@@ -24,11 +24,14 @@ def fcn_pts(dims=3, n=20, precision=3):
 
     return fcn_pts_dict
 
-def fcn_outputs(dims=3, n=20, precision=3, header="", functions=[shubert, vincent, CF1, CF2]):
+def fcn_outputs(dims=3, n=20, precision=3, functions=[shubert, vincent, CF1, CF2]):
 
     assert(dims in DIMS)
     
     fcn_pts_dict = fcn_pts(dims=dims, n=n)
+
+    xcoords = ["x" + str(d) for d in range(dims)]
+    header = xcoords + ["fitness"]
 
     for fcn in functions:
         fname = "../../data/coords_" + fcn.__name__ + "_" + str(dims) + "D.csv"
@@ -45,6 +48,6 @@ def fcn_outputs(dims=3, n=20, precision=3, header="", functions=[shubert, vincen
                 fcn_writer.writerow(row)
         print(fname)
 
-fcn_outputs(dims=2, header=["x1", "x2", "fitness"])
-fcn_outputs(dims=3, header=["x1", "x2", "x3", "fitness"])
-fcn_outputs(dims=4, header=["x1", "x2", "x3", "x4", "fitness"])
+fcn_outputs(dims=2)
+fcn_outputs(dims=3)
+fcn_outputs(dims=4)

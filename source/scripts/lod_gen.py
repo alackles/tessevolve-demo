@@ -18,16 +18,12 @@ def lod_dict_from_phylo(filepath):
 # Create the line of descent file
 # Columns: ID (generation), values 
 def export_lod(lod, dims, lodpath="lod.csv"):
+
+    assert dims in [2, 3, 4]
+
     with open(lodpath, "w") as lod_file:
-        if (dims==4):
-            lod_file.write("id,x,y,z,k\n")
-        elif (dims==3):
-            lod_file.write("id,x,y,z\n")
-        elif (dims==2):
-            lod_file.write("id,x,y\n")
-        else:
-            print("Dims invalid")
-            return 
+        xcoords = ",".join(["x" + str(d) for d in range(dims)])
+        lod_file.write("id" + xcoords + "\n")
 
     for gen, vals in lod.items():
         vals = ",".join(vals.lstrip('[ ').rstrip(' ]').split())
