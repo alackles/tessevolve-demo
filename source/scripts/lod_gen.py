@@ -78,6 +78,7 @@ def main():
         lod = lod_dict_from_phylo(filepath)
         export_lod(lod, int(dim), lodpath)
         export_edges(lod, edgepath)
+        print(dirpath)
     
     
 

@@ -109,9 +109,6 @@ var load_landscape = function() {
 
         var colScale = d3.scaleSequential(d3.interpolatePlasma);
         colScale.domain([min, max])
-
-        var phyloScale = d3.scaleSequential(d3.interpolateViridis);
-        phyloScale.domain([0, 10000])
         
         pts.enter()
             .append('a-sphere')
@@ -124,7 +121,7 @@ var load_landscape = function() {
          nodes.enter()
             .append('a-box')
             .attr('class', 'phylo_node')
-            .attr('color', function (d) {return phyloScale(d.id)})
+            .attr('color', function (d) {return colScale(d.fitness)})
             .attr('position', function(d) {return coords(d.x, d.y, d.z)})
             .attr('height', 0.2)
             .attr('depth', 0.2)

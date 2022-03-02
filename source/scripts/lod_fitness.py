@@ -9,12 +9,25 @@ from pylandscapes.cfunctions import CF2
 import inspect
 import itertools as it
 
+def parse_line(line):
+    return [float(x) for x in line.strip().split(",")[1:]] # get only the parts that are the actual input 
 
 def eval_lod_fitness(fname, fcn, precision=3):
     with open(fname, 'r') as f:
-        f.readline() # skip header
-        all_lines = f.readlines()
-        print(all_lines)
+        header = f.readline().strip() + ",fitness\n" # skip header and append fitness
+        lines = f.readlines() # get every line
+        for i, line in enumerate(lines):
+            fcn_input = parse_line(line)
+            dims = len(fcn_input)
+            if inspect.isclass(fcn):
+                fitness = round(fcn(dims).evaluate(fcn_input), precision)
+            else:
+                fitness = round(fcn(fcn_input), precision)
+            lines[i] = line.strip() + "," + str(fitness) + "\n"
+    with open(fname, "w") as f:
+        f.write(header)
+        f.writelines(lines)
+        
 
 def main():
 
@@ -34,18 +47,11 @@ def main():
         "CF2": CF2
     }
 
-    # toy
-    reps = ["00"]
-    fcns = ["Shubert"]
-    dims = ["3"]
-    mutrates = ["01"]
-    tournament_sizes = ["16"]
-
-    #reps = [str(x).rjust(2, '0') for x in range(first, last)]
-    #fcns = ["Shubert", "Vincent", "CF1", "CF2"]
-    #dims = ["2", "3", "4"]
-    #mutrates = ["01", "001", "0001", "00001"]
-    #tournament_sizes = ["02", "04", "08", "16"]
+    reps = [str(x).rjust(2, '0') for x in range(first, last)]
+    fcns = ["Shubert", "Vincent", "CF1", "CF2"]
+    dims = ["2", "3", "4"]
+    mutrates = ["01", "001", "0001", "00001"]
+    tournament_sizes = ["02", "04", "08", "16"]
 
     parameters = it.product(reps, fcns, dims, mutrates, tournament_sizes)
     for param in parameters:
@@ -54,6 +60,7 @@ def main():
         dirpath = reppath + parampath 
         lodpath = dirpath + lodname 
         eval_lod_fitness(lodpath, fcn_map[fcn])
+        print(dirpath)
 
 if __name__=="__main__":
     main()
