@@ -10,13 +10,13 @@
 import os
 from pathlib import Path 
 
-buildpath = "./third-party/MABE2/build/"
+buildpath = "./../third-party/MABE2/build/"
 runpath = buildpath + "MABE"
-reppath = "../data/reps/"
-datpath = "./third-party/MABE2/source/tools/DataGECCO/"
+reppath = "./../../data/reps/"
+datpath = "./../third-party/MABE2/source/tools/DataGECCO/"
 
-genfile = "./third-party/MABE2/settings/GECCO.gen"
-mabefile = "./third-party/MABE2/settings/GECCO.mabe"
+genfile = "./../third-party/MABE2/settings/GECCO.gen"
+mabefile = "./../third-party/MABE2/settings/GECCO.mabe"
 
 firstrep = 0
 lastrep = 2
@@ -32,7 +32,7 @@ dims = [2, 3, 4]
 digs = 2
 
 # clean build of MABE
-os.system("cd " + buildpath + "&& make clean && make && cd ../../../")
+os.system("cd " + buildpath + "&& make clean && make && cd ../../../scripts/")
 
 for fcn, minmax in fcns.items():
   minval = minmax[0]

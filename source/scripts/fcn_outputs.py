@@ -1,8 +1,8 @@
 # import functions from niching space
-from functions import shubert
-from functions import vincent
-from CF1 import CF1
-from CF2 import CF2
+from pylandscapes.functions import shubert
+from pylandscapes.functions import vincent
+from pylandscapes.CF1 import CF1
+from pylandscapes.CF2 import CF2
 
 # import other packages
 import numpy as np

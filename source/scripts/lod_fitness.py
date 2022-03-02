@@ -2,10 +2,10 @@
 #  @brief Take the generated lod files and run them through the fitness functions to append fitness to them 
 # import functions from niching space
 
-from ..source.landscapes.functions import shubert
-from ..source.landscapes.functions import vincent
-from ..source.landscapes.CF1 import CF1
-from ..source.landscapes.CF2 import CF2
+from pylandscapes.functions import shubert
+from pylandscapes.functions import vincent
+from pylandscapes.CF1 import CF1
+from pylandscapes.CF2 import CF2
 import inspect
 import itertools as it
 
