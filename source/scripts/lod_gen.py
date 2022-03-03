@@ -1,9 +1,10 @@
-import ALifeStdDev.phylogeny as phylodev
-import math
 import collections
 import itertools as it
+import math
 from decimal import Decimal
 
+import ALifeStdDev.phylogeny as phylodev
+from repparse import parameters
 
 # Create an ordered dictionary of a line of descent from the phylogeny
 # This allows us to put the LOD in time order
@@ -45,39 +46,24 @@ def export_edges(lod, edgepath="edges.csv"):
 
 def main():
 
-    # reps
-    first = 0
-    last = 2
-
-    datapath = "./../../data/"
-    reppath = datapath + "reps/"
-
-    filename = "phylogeny_1000.csv"
+    phyloname = "phylogeny_1000.csv"
     lodname = "lod.csv"
     edgename = "edges.csv"
+    
+    params = parameters()
 
-    reps = [str(x).rjust(2, '0') for x in range(first, last)]
-    fcns = ["Shubert", "Vincent", "CF1", "CF2"]
-    dims = ["2", "3", "4"]
-    mutrates = ["01", "001", "0001", "00001"]
-    tournament_sizes = ["02", "04", "08", "16"]
-
-    parameters = it.product(reps, fcns, dims, mutrates, tournament_sizes)
-    for param in parameters:
-        rep, fcn, dim, mutrate, tourny = param
-        parampath = "SEED_" + rep + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/"
-        dirpath = reppath + parampath 
-        filepath = dirpath + filename
+    for p in params:
+        dirpath = p["path"]
+        dim = p["dim"]
+        filepath = dirpath + phyloname
         lodpath = dirpath + lodname 
         edgepath = dirpath + edgename
-
+        
         lod = lod_dict_from_phylo(filepath)
         export_lod(lod, int(dim), lodpath)
         export_edges(lod, edgepath)
         print(dirpath)
     
-    
-
 if __name__=="__main__":
     main()
 

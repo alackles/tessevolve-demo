@@ -1,14 +1,11 @@
 # import functions from niching space
-from pylandscapes.functions import shubert
-from pylandscapes.functions import vincent
-from pylandscapes.cfunctions import CF1
-from pylandscapes.cfunctions import CF2
-
-# import other packages
-import numpy as np
 import csv
-import itertools as it
-import inspect 
+import inspect
+import itertools as iter
+import numpy as np
+
+from pylandscapes.cfunctions import CF1, CF2
+from pylandscapes.functions import shubert, vincent
 
 DIMS = [2, 3, 4]
 
@@ -17,10 +14,10 @@ def fcn_pts(dims=3, n=20, precision=3):
     vincent_range = np.round(np.linspace(start = 0.25, stop=10.25, num=n), precision)
     
 
-    fcn_pts_dict = {"shubert": it.product(shubert_range, repeat=dims), 
-             "vincent": it.product(vincent_range, repeat=dims),
-             "CF1": it.product(cf1_range, repeat=dims),
-             "CF2": it.product(cf2_range,repeat=dims)}
+    fcn_pts_dict = {"shubert": iter.product(shubert_range, repeat=dims), 
+             "vincent": iter.product(vincent_range, repeat=dims),
+             "CF1": iter.product(cf1_range, repeat=dims),
+             "CF2": iter.product(cf2_range,repeat=dims)}
 
     return fcn_pts_dict
 
