@@ -1,11 +1,25 @@
 // TODO: Vincent cmaera rig should be 25 25 25 
 
 var accessor = function(row) {
+    // for 3D
+        var x2Val;
+    // for 4D
+        var x3Val;
+    if (typeof row.x2 !== 'undefined') {
+        x2Val = +row.x2*10;
+    } else {
+        x2Val = 0;
+    }
+    if (typeof row.x3 !== 'undefined') {
+        x3Val = +row.x2*10;
+    } else {
+        x3Val = 0;
+    }
     return {
         x0: +row.x0*10,
         x1: +row.x1*10,
-        x2: +row.x2*10,
-        x3: + row.x3*10,
+        x2: x2Val,
+        x3: x3Val,
         fitness: +row.fitness,
         id: +row.id
     }
@@ -77,7 +91,7 @@ var load_landscape = function() {
         const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
         
         var pts = scene.selectAll('a-sphere')
-            .data(landscape, function(d){return d.x})
+            .data(landscape, function(d){return d.x0})
         
         if (phylo_detail !== "0") {
           var nodes = scene.selectAll('a-box')
@@ -98,7 +112,7 @@ var load_landscape = function() {
             .append('a-sphere')
             .attr('class', 'data_point')
             .attr('color', function(d) {return colScale(d.fitness)})
-            .attr('position', function(d) {return coords(d.x, d.y, d.z)})
+            .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
             .attr('radius', 1)
             .attr('opacity', 0.9);
         
@@ -106,7 +120,7 @@ var load_landscape = function() {
             .append('a-box')
             .attr('class', 'phylo_node')
             .attr('color', function (d) {return colScale(d.fitness)})
-            .attr('position', function(d) {return coords(d.x, d.y, d.z)})
+            .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
             .attr('height', 0.2)
             .attr('depth', 0.2)
             .attr('width', 0.2) 
