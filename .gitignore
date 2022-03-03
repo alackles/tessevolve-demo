@@ -2,6 +2,7 @@
 .vscode/
 
 # pycache
+source/scripts/__pycache__/*
 source/scripts/pylandscapes/__pycache__/*
 
 # reps
