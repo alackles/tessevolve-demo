@@ -88,8 +88,22 @@ var load_landscape = function() {
         lod = files[1]
         edges = files[2]
         
+        var min = d3.min(landscape, function(d) {return d.fitness});
+        var max = d3.max(landscape, function(d) {return d.fitness});
+
+        var colScale = d3.scaleSequential(d3.interpolatePlasma);
+        colScale.domain([min, max])
+       
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x0})
+        
+        pts.enter()
+            .append('a-sphere')
+            .attr('class', 'data_point')
+            .attr('color', function(d) {return colScale(d.fitness)})
+            .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
+            .attr('radius', 1)
+            .attr('opacity', 0.9);
         
         if (phylo_detail !== "0") {
 
@@ -113,19 +127,6 @@ var load_landscape = function() {
         
         }
 
-        var min = d3.min(landscape, function(d) {return d.fitness});
-        var max = d3.max(landscape, function(d) {return d.fitness});
-
-        var colScale = d3.scaleSequential(d3.interpolatePlasma);
-        colScale.domain([min, max])
-        
-        pts.enter()
-            .append('a-sphere')
-            .attr('class', 'data_point')
-            .attr('color', function(d) {return colScale(d.fitness)})
-            .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
-            .attr('radius', 1)
-            .attr('opacity', 0.9);
         }
     )
 
