@@ -9,7 +9,7 @@ from pylandscapes.functions import shubert, vincent
 
 DIMS = [2, 3, 4]
 
-def fcn_pts(dims=3, n=20, precision=3):
+def fcn_pts(dims=3, n=21, precision=3):
     shubert_range = cf1_range = cf2_range = np.round(np.linspace(start=-5, stop=5, num=n), precision)
     vincent_range = np.round(np.linspace(start = 0.25, stop=10.25, num=n), precision)
     
@@ -21,7 +21,7 @@ def fcn_pts(dims=3, n=20, precision=3):
 
     return fcn_pts_dict
 
-def fcn_outputs(dims=3, n=20, precision=3, functions=[shubert, vincent, CF1, CF2]):
+def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2]):
 
     assert(dims in DIMS)
     
