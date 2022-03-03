@@ -87,19 +87,30 @@ var load_landscape = function() {
         landscape = files[0]
         lod = files[1]
         edges = files[2]
-
-        const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
         
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x0})
         
         if (phylo_detail !== "0") {
+
+          const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
+          
           var nodes = scene.selectAll('a-box')
               .data(lod, function(d){return d.id})
         
           var lod = scene.append('a-entity')
             .attr('id', "phyloLine")
             .attr('meshline', meshline_param)
+        
+          nodes.enter()
+            .append('a-box')
+            .attr('class', 'phylo_node')
+            .attr('color', function (d) {return colScale(d.fitness)})
+            .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
+            .attr('height', 0.2)
+            .attr('depth', 0.2)
+            .attr('width', 0.2) 
+        
         }
 
         var min = d3.min(landscape, function(d) {return d.fitness});
@@ -115,16 +126,6 @@ var load_landscape = function() {
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
             .attr('radius', 1)
             .attr('opacity', 0.9);
-        
-         nodes.enter()
-            .append('a-box')
-            .attr('class', 'phylo_node')
-            .attr('color', function (d) {return colScale(d.fitness)})
-            .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
-            .attr('height', 0.2)
-            .attr('depth', 0.2)
-            .attr('width', 0.2) 
-        
         }
     )
 
