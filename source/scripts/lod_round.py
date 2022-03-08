@@ -46,7 +46,7 @@ def contract_df(df, xcols):
  
 def main():
     params = parameters() 
-    lodname = "lod.csv"
+    lodname = "lod_full.csv"
 
     for p in params:
         dirpath = p["path"]
@@ -55,16 +55,16 @@ def main():
 
         xcols = ["x" + str(d) for d in range(int(dim))]
         rounding = {
-            "hi": 0.0,
+            "lo": 0.0,
             "md": 0.5,
-            "lo": 0.25,
+            "hi": 0.25,
         }
 
         df = pd.read_csv(lodpath)
 
         for label, rnd in rounding.items():
             df_round = df.copy()
-            roundname = "lod_round_" + label + ".csv"
+            roundname = "lod_" + label + ".csv"
             roundpath = dirpath + roundname
 
             for col in xcols:

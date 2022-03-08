@@ -34,7 +34,7 @@ def eval_lod_fitness(fname, fcn, precision=3):
 
 def main():
 
-    lodname = "lod.csv"
+    lodname = "lod_full.csv"
 
     fcn_map = {"Shubert": shubert, "Vincent": vincent, "CF1": CF1, "CF2": CF2}
 

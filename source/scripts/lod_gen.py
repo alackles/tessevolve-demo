@@ -1,7 +1,5 @@
 import collections
-import itertools as it
 import math
-from decimal import Decimal
 
 import ALifeStdDev.phylogeny as phylodev
 from repparse import parameters
@@ -33,27 +31,10 @@ def export_lod(lod, dims, lodpath="lod.csv"):
         with open(lodpath, "a") as lod_file:
             lod_file.write(line)
 
-
-# Turn the line of descent file into a single string for the purposes of creating a "meshline"
-# Format is val1, val2, [val3, val4]; val1, val2, val3, val4;
-def export_edges(lod, edgepath="edges.csv"):
-    edge_list = []
-    for vals in lod.values():
-        # multiply string values by 10 and convert back to string
-        # this helps the spacing visually
-        vals = " ".join(
-            [str(Decimal(x) * 10) for x in vals.lstrip("[ ").rstrip(" ]").split()]
-        )
-        edge_list.append(vals)
-    with open(edgepath, "w") as edge_file:
-        edge_file.write(",".join(edge_list))
-
-
 def main():
 
     phyloname = "phylogeny_1000.csv"
-    lodname = "lod.csv"
-    edgename = "edges.csv"
+    lodname = "lod_full.csv"
 
     params = parameters()
 
@@ -62,11 +43,9 @@ def main():
         dim = p["dim"]
         filepath = dirpath + phyloname
         lodpath = dirpath + lodname
-        edgepath = dirpath + edgename
 
         lod = lod_dict_from_phylo(filepath)
         export_lod(lod, int(dim), lodpath)
-        export_edges(lod, edgepath)
         print(dirpath)
 
 
