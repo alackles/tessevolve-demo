@@ -68,7 +68,12 @@ var load_landscape = function() {
     var coord_data = basepath + "coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
-    var node_data = replicate_path + "lod.csv"
+    var node_data = "";
+    if (phylo_detail == "1" || phylo_detail == "0") {
+        node_data = replicate_path + "lod.csv";
+    } else {
+        node_data = replicate_path + "lod_round_" + phylo_detail + ".csv"
+    }
     var edge_data = replicate_path + "edges.csv"
 
     var scene = d3.select('a-scene')
