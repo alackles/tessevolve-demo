@@ -63,16 +63,16 @@ def main():
         df = pd.read_csv(lodpath)
 
         for label, rnd in rounding.items():
-
+            df_round = df.copy()
             roundname = "lod_round_" + label + ".csv"
             roundpath = dirpath + roundname
 
             for col in xcols:
-                df[col] = df[col].apply(round_nearest, args=(rnd,))
+                df_round[col] = df_round[col].apply(round_nearest, args=(rnd,))
         
-            df = contract_df(df, xcols)
+            df_round = contract_df(df_round, xcols)
 
-            df.to_csv(roundpath, index=False)
+            df_round.to_csv(roundpath, index=False)
 
         print(dirpath)
 
