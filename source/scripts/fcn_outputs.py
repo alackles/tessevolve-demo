@@ -9,22 +9,27 @@ from pylandscapes.functions import shubert, vincent
 
 DIMS = [2, 3, 4]
 
-def fcn_pts(dims=3, n=21, precision=3):
-    shubert_range = cf1_range = cf2_range = np.round(np.linspace(start=-5, stop=5, num=n), precision)
-    vincent_range = np.round(np.linspace(start = 0.25, stop=10.25, num=n), precision)
-    
 
-    fcn_pts_dict = {"shubert": iter.product(shubert_range, repeat=dims), 
-             "vincent": iter.product(vincent_range, repeat=dims),
-             "CF1": iter.product(cf1_range, repeat=dims),
-             "CF2": iter.product(cf2_range,repeat=dims)}
+def fcn_pts(dims=3, n=21, precision=3):
+    shubert_range = cf1_range = cf2_range = np.round(
+        np.linspace(start=-5, stop=5, num=n), precision
+    )
+    vincent_range = np.round(np.linspace(start=0.25, stop=10.25, num=n), precision)
+
+    fcn_pts_dict = {
+        "shubert": iter.product(shubert_range, repeat=dims),
+        "vincent": iter.product(vincent_range, repeat=dims),
+        "CF1": iter.product(cf1_range, repeat=dims),
+        "CF2": iter.product(cf2_range, repeat=dims),
+    }
 
     return fcn_pts_dict
 
+
 def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2]):
 
-    assert(dims in DIMS)
-    
+    assert dims in DIMS
+
     fcn_pts_dict = fcn_pts(dims=dims, n=n)
 
     xcoords = ["x" + str(d) for d in range(dims)]
@@ -33,7 +38,7 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
     for fcn in functions:
         fname = "../../data/coords_" + fcn.__name__ + "_" + str(dims) + "D.csv"
         fcoords = list(fcn_pts_dict[fcn.__name__])
-        with open(fname, 'w') as f:
+        with open(fname, "w") as f:
             fcn_writer = csv.writer(f, delimiter=",", quotechar='"')
             fcn_writer.writerow(header)
             for coords in fcoords:
@@ -44,6 +49,7 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
                 row = list(coords) + [fitness]
                 fcn_writer.writerow(row)
         print(fname)
+
 
 fcn_outputs(dims=2)
 fcn_outputs(dims=3)
