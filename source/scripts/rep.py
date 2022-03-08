@@ -21,8 +21,8 @@ mabefile = "./../third-party/MABE2/settings/GECCO.mabe"
 firstrep = 0
 lastrep = 2
 fcns = {
-  "Shubert": (-5, 5), 
-  "Vincent": (0.25, 10.25), 
+  "shubert": (-5, 5), 
+  "vincent": (0.25, 10.25), 
   "CF1": (-5, 5), 
   "CF2": (-5, 5)
   }
