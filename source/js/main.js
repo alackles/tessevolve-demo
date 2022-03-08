@@ -69,12 +69,14 @@ var load_landscape = function() {
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
     var node_data = "";
-    if (phylo_detail == "1" || phylo_detail == "0") {
-        node_data = replicate_path + "lod.csv";
-    } else {
-        node_data = replicate_path + "lod_round_" + phylo_detail + ".csv"
+    if (phylo_detail !== "0") {
+        node_data = replicate_path + "lod_" + phylo_detail + ".csv"
     }
-    var edge_data = replicate_path + "edges.csv"
+    var edge_data = "";
+    if (phylo_detail !== "0") {
+        edge_data = replicate_path + "edge_" + phylo_detail + ".csv"
+    }
+    replicate_path + "edges.csv"
 
     var scene = d3.select('a-scene')
 
