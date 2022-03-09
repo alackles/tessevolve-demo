@@ -8,68 +8,87 @@
 #  TODO: parallelize (or just extend into an actual MABE2 functionality)
 
 import os
-from pathlib import Path 
+from pathlib import Path
 
-buildpath = "./../third-party/MABE2/build/"
-runpath = buildpath + "MABE"
-reppath = "./../../data/reps/"
-datpath = "./../third-party/MABE2/source/tools/DataGECCO/"
+from repparse import parameters
 
-genfile = "./../third-party/MABE2/settings/GECCO.gen"
-mabefile = "./../third-party/MABE2/settings/GECCO.mabe"
+def buildmabe(buildpath):
+  os.system("cd " + buildpath + "&& make clean && make && cd ../../../scripts/")
 
-firstrep = 0
-lastrep = 2
-fcns = {
-  "shubert": (-5, 5), 
-  "vincent": (0.25, 10.25), 
-  "CF1": (-5, 5), 
-  "CF2": (-5, 5)
-  }
-tournament_sizes = [2, 4, 8, 16]
-mutrates = [0.1, 0.01, 0.001, 0.0001]
-dims = [2, 3, 4]
-digs = 2
+def runmabe(exec, mabefile, params):
+  # exec: path to MABE executable
+  # params: command-line parameters
+  # first: first replicate
+  # last: last replicate (works like python, so not inclusive)
+  os.system(exec + " -f " + mabefile + " -s " + params)
 
-# clean build of MABE
-os.system("cd " + buildpath + "&& make clean && make && cd ../../../scripts/")
-
-for fcn, minmax in fcns.items():
-  minval = minmax[0]
-  maxval = minmax[1]
-  for tourny in tournament_sizes: 
-    tournystr = str(tourny).rjust(2, '0')
-    for mut in mutrates:
-      mutstr = str(mut).replace(".","")
-      for dim in dims:
-        dimstr = str(dim)
-        for rep in range(firstrep, lastrep): 
-            # random seeds and folder creation
-            randseed = rep
-            dirname = reppath + "SEED_" + str(randseed).rjust(digs, '0') + "__F_" + fcn + "__D_" + dimstr + "__MUT_" + mutstr + "__T_" + tournystr + "/" 
-            print(dirname)
-            Path(dirname).mkdir(parents=True, exist_ok=True)
-
-            #variables 
-            fcn_var = 'eval_gecco.fcn_name=\\"' + fcn + '\\"'
-            dim_var = 'eval_gecco.dims=\\"' + str(dim) + '\\"'
-            vals_var = 'vals_org.N=\\"' + str(dim) + '\\"'
-            min_var = 'vals_org.min_value=\\"' + str(minval) + '\\"'
-            max_var = 'vals_org.max_value=\\"' + str(maxval) + '\\"'
-
-            mut_rate = 'vals_org.mut_prob=\\"' + str(1) + '\\"'
-            mut_var = 'vals_org.mut_size=\\"' + str(mut) + '\\"'
-            tourney_var = 'select_tourny.tournament_size=\\"' + str(tourny) + '\\"'
-
-            randseed_var = "random_seed=" + str(randseed)
-            datpath_var = 'eval_gecco.dat_path=\\"' + datpath + '\\"'
-
-            outpath_var = 'output.filename=\\"' + dirname + 'output.csv\\"'
-            genpath_var = 'eval_gecco.genome_file=\\"' + dirname + 'genome.csv\\"'
-            phylopath_var = 'sys.snapshot_file_root_name=\\"' + dirname + 'phylogeny\\"'
-            phylodatapath_var = 'sys.data_file_name=\\"' + dirname + 'phylogenetic_data.csv\\"'
+def make_settings(param, mabepath):
 
 
-            settings = fcn_var + "\;" + dim_var + "\;" + vals_var + "\;" + min_var + "\;" + max_var + "\;" + mut_rate + "\;" + mut_var + "\;" + tourney_var +"\;" + randseed_var + "\;" + datpath_var + "\;" + outpath_var + "\;" + genpath_var + "\;" + phylopath_var + "\;" + phylodatapath_var 
-            print(settings)
-            os.system(runpath + " -f " + mabefile + " -s " + settings)
+  reppath = param["path"]
+  seed = str(int(param["rep"])) # remove leading 0s
+  fcn = param["fcn"]
+  dim = param["dim"]
+  mutrate = param["mutrate"][0] + "." + param["mutrate"][1:]
+  tourny = str(int(param["tourny"])) # remove leading 0s
+  
+  datpath = mabepath + "source/tools/DataGECCO/" # path for GECCO niching function .dat file
+
+  fcn_range = {
+    "shubert": (-5, 5), 
+    "vincent": (0.25, 10.25), 
+    "CF1": (-5, 5), 
+    "CF2": (-5, 5)
+    }
+
+  fcn_min = fcn_range[param["fcn"]][0]
+  fcn_max = fcn_range[param["fcn"]][1]
+
+  settings = []
+  
+  # RANDOM SEED
+  settings.append("random_seed=" + seed + '\\"')
+  
+  # OUTPUT
+  settings.append('output.filename=\\"' + reppath + 'output.csv\\"')
+  
+  # TOURNAMENT SIZE
+  settings.append('select_tourny.tournament_size=\\"' + tourny + '\\"')
+ 
+  
+  # EVAL_GECCO
+  settings.append('eval_gecco.fcn_name=\\"' + fcn + '\\"')      # function of interest
+  settings.append('eval_gecco.dims=\\"' + dim + '\\"')          # how many dimensions
+  settings.append('eval_gecco.dat_path=\\"' + datpath + '\\"')           # where data is stored
+  
+  # VALS_ORG
+  settings.append('vals_org.N=\\"' + dim + '\\"')                  # number of dimensions
+  settings.append('vals_org.min_value=\\"' + str(fcn_min) + '\\"')          # min function value
+  settings.append('vals_org.max_value=\\"' + str(fcn_max) + '\\"')          # max function value
+  settings.append('vals_org.mut_size=\\"' + mutrate + '\\"')       # mutation 'rate' (size)
+
+  # SYSTEMATICS MANAGER
+  settings.append('sys.snapshot_file_root_name=\\"' + reppath + 'phylogeny\\"')
+  settings.append('sys.data_file_name=\\"' + reppath + 'phylogenetic_data.csv\\"')
+
+  return "\;".join(settings)
+
+def main():
+
+  mabepath = "./../third-party/MABE2/" # path for MABE2 repository
+  mabefile = mabepath + "settings/GECCO.mabe" # path for .mabe config file (old)
+
+  buildpath = mabepath + "build/" # path for MABE2 build folder
+  runfile = buildpath + "MABE" # path for MABE executable
+
+  params = parameters()
+
+  buildmabe(buildpath)
+
+  for param in params:
+    Path(param["path"]).mkdir(parents=True, exist_ok=True)
+    setting = make_settings(param, mabepath)
+    runmabe(runfile, mabefile, setting)
+
+if __name__=="__main__":
+  main()
