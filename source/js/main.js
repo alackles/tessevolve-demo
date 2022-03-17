@@ -1,28 +1,24 @@
 // TODO: Vincent cmaera rig should be 25 25 25 
 
+// Standard accessor: 2D and 3D
 var accessor = function(row) {
-    // for 3D
-        var x2Val;
-    // for 4D
-        var x3Val;
+    var x2Val;
     if (typeof row.x2 !== 'undefined') {
         x2Val = +row.x2*10;
     } else {
         x2Val = 0;
     }
-    if (typeof row.x3 !== 'undefined') {
-        x3Val = +row.x2*10;
-    } else {
-        x3Val = 0;
-    }
     return {
         x0: +row.x0*10,
         x1: +row.x1*10,
         x2: x2Val,
-        x3: x3Val,
         fitness: +row.fitness,
         id: +row.id
     }
+}
+
+var accessor_4D = function(row) {
+    
 }
 
 var coords = function(x, y, z) {
