@@ -51,6 +51,6 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
         print(fname)
 
 
-fcn_outputs(dims=2)
-fcn_outputs(dims=3)
+#fcn_outputs(dims=2)
+#fcn_outputs(dims=3)
 fcn_outputs(dims=4)
