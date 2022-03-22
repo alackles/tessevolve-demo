@@ -93,7 +93,7 @@ var load_landscape = function() {
             .attr('class', 'data_point')
             .attr('color', function(d) {return colScale(d.fitness)})
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
-            .attr('radius', 1)
+            .attr('radius', 0.1)
             .attr('opacity', 0.9);
         
         if (phylo_detail !== "0") {

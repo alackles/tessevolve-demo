@@ -33,6 +33,8 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
     fcn_pts_dict = fcn_pts(dims=dims, n=n)
 
     xcoords = ["x" + str(d) for d in range(dims)]
+    if dims==2:
+        xcoords.append("x2")
     header = xcoords + ["fitness"]
 
     for fcn in functions:
@@ -46,11 +48,14 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
                     fitness = round(fcn(dims).evaluate(coords), precision)
                 else:
                     fitness = round(fcn(coords), precision)
-                row = list(coords) + [fitness]
+                coords_list = list(coords)
+                if dims == 2:
+                    coords_list.append(0)
+                row = coords_list + [fitness]
                 fcn_writer.writerow(row)
         print(fname)
 
 
-#fcn_outputs(dims=2)
+fcn_outputs(dims=2)
 #fcn_outputs(dims=3)
-fcn_outputs(dims=4)
+#fcn_outputs(dims=4)
