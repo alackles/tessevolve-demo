@@ -8,7 +8,7 @@ def export_edges(lodpath="lod.csv", edgepath="edges.csv"):
     with open(lodpath, "r") as lod_file:
         next(lod_file)
         for line in lod_file:
-            edge_list.append(" ".join(str(Decimal(x) * 10) for x in line.split(",")[1:-1])) # grab middle values, not fitness or ID
+            edge_list.append(" ".join(x for x in line.split(",")[1:-1])) # grab middle values, not fitness or ID
     with open(edgepath, "w") as edge_file:
         edge_file.write(",".join(edge_list))
 
