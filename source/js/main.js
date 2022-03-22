@@ -2,23 +2,11 @@
 
 // Standard accessor: 2D and 3D
 var accessor = function(row) {
-    var x2Val;
-    if (typeof row.x2 !== 'undefined') {
-        x2Val = +row.x2*10;
-    } else {
-        x2Val = 0;
+   numeric_row = {};
+    for (col in row) {
+        numeric_row[col] = +row[col];
     }
-    return {
-        x0: +row.x0*10,
-        x1: +row.x1*10,
-        x2: x2Val,
-        fitness: +row.fitness,
-        id: +row.id
-    }
-}
-
-var accessor_4D = function(row) {
-    
+    return numeric_row
 }
 
 var coords = function(x, y, z) {
