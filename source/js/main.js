@@ -6,6 +6,7 @@ var accessor = function(row) {
     for (col in row) {
         numeric_row[col] = +row[col];
     }
+    console.log(numeric_row)
     return numeric_row
 }
 
@@ -64,26 +65,30 @@ var load_landscape = function() {
 
     var scene = d3.select('a-scene')
 
-    d3_coord_data = d3.csv(coord_data, accessor);
-    d3_node_data = d3.csv(node_data, accessor);
-    d3_edge_data = d3.text(edge_data)
+    var d3_coord_data = d3.csv(coord_data, accessor);
+    var d3_node_data = d3.csv(node_data, accessor);
+    var d3_edge_data = d3.text(edge_data)
 
     Promise.all([
         d3_coord_data,
         d3_node_data,
-        d3_edge_data
+        d3_edge_data,
+        dim
     ])
     .then(
         function(files) {
         landscape = files[0]
         lod = files[1]
         edges = files[2]
+        dims = files[3]
         
-        var min = d3.min(landscape, function(d) {return d.fitness});
-        var max = d3.max(landscape, function(d) {return d.fitness});
+        var min = d3.min(landscape, function(d) {return d.fitness0});
+        var max = d3.max(landscape, function(d) {return d.fitness0});
 
         var colScale = d3.scaleSequential(d3.interpolatePlasma);
         colScale.domain([min, max])
+
+        console.log(landscape)
        
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x0})
@@ -91,8 +96,8 @@ var load_landscape = function() {
         pts.enter()
             .append('a-sphere')
             .attr('class', 'data_point')
-            .attr('color', function(d) {return colScale(d.fitness)})
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
+            .attr('color', function (d) {return colScale(d.fitness0)})
             .attr('radius', 0.1)
             .attr('opacity', 0.9);
         
@@ -110,14 +115,13 @@ var load_landscape = function() {
           nodes.enter()
             .append('a-box')
             .attr('class', 'phylo_node')
-            .attr('color', function (d) {return colScale(d.fitness)})
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
             .attr('height', 0.2)
             .attr('depth', 0.2)
-            .attr('width', 0.2) 
+            .attr('width', 0.2)
+            .attr('color', function (d) {return colScale(d.fitness0)})
+          }
         
-        }
-
         }
     )
 
