@@ -1,12 +1,12 @@
 // TODO: Vincent cmaera rig should be 25 25 25 
 
 // Standard accessor: 2D and 3D
+// https://stackoverflow.com/questions/25412046/d3js-working-with-unknown-headers-number-of-columns-number-of-rows
 var accessor = function(row) {
    numeric_row = {};
     for (col in row) {
         numeric_row[col] = +row[col];
     }
-    console.log(numeric_row)
     return numeric_row
 }
 
@@ -88,18 +88,36 @@ var load_landscape = function() {
         var colScale = d3.scaleSequential(d3.interpolatePlasma);
         colScale.domain([min, max])
 
-        console.log(landscape)
-       
+        var colorDim = 0
+
+        var colorChange = function() {
+            colorDim -= 0.5
+            if (colorDim < -5) {
+                colorDim = 5
+            }
+            var colorDimName = "fitness" + String(colorDim)
+            console.log(colorDimName)
+            if (dims == 4) {
+                scene.selectAll('.data_point')
+                    .attr('color', function(d) {return colScale(d[colorDimName])})
+                console.log("function triggered")
+            } else {
+                console.log("not triggered")
+            }
+        }
+
         var pts = scene.selectAll('a-sphere')
             .data(landscape, function(d){return d.x0})
-        
+
         pts.enter()
             .append('a-sphere')
             .attr('class', 'data_point')
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
             .attr('color', function (d) {return colScale(d.fitness0)})
             .attr('radius', 0.1)
-            .attr('opacity', 0.9);
+            .attr('opacity', 0.9)
+        
+        scene.on("wheel", colorChange)
         
         if (phylo_detail !== "0") {
 
