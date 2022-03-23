@@ -81,44 +81,34 @@ var load_landscape = function() {
         lod = files[1]
         edges = files[2]
         dims = files[3]
+
+        var fitnessCol = "fitness0"
         
-        var min = d3.min(landscape, function(d) {return d.fitness0});
-        var max = d3.max(landscape, function(d) {return d.fitness0});
+        // Set color scale 
+        var set_min = function(fitnessCol) {
+            return d3.min(landscape, function(d) {return d[fitnessCol]})
+        };
+
+        var set_max = function(fitnessCol) {
+            return d3.max(landscape, function(d) {return d[fitnessCol]})
+        };
 
         var colScale = d3.scaleSequential(d3.interpolatePlasma);
-        colScale.domain([min, max])
+        colScale.domain([set_min(fitnessCol), set_max(fitnessCol)])
 
-        var colorDim = 0
-
-        var colorChange = function() {
-            colorDim -= 0.5
-            if (colorDim < -5) {
-                colorDim = 5
-            }
-            var colorDimName = "fitness" + String(colorDim)
-            console.log(colorDimName)
-            if (dims == 4) {
-                scene.selectAll('.data_point')
-                    .attr('color', function(d) {return colScale(d[colorDimName])})
-                console.log("function triggered")
-            } else {
-                console.log("not triggered")
-            }
-        }
-
+        // Draw Points 
         var pts = scene.selectAll('a-sphere')
-            .data(landscape, function(d){return d.x0})
+            .data(landscape, function(d){return d.x0});
 
         pts.enter()
             .append('a-sphere')
             .attr('class', 'data_point')
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
-            .attr('color', function (d) {return colScale(d.fitness0)})
+            .attr('color', function (d) {return colScale(d[fitnessCol])})
             .attr('radius', 0.1)
             .attr('opacity', 0.9)
         
-        scene.on("wheel", colorChange)
-        
+        // Draw Nodes
         if (phylo_detail !== "0") {
 
           const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
@@ -134,11 +124,28 @@ var load_landscape = function() {
             .append('a-box')
             .attr('class', 'phylo_node')
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
-            .attr('height', 0.2)
-            .attr('depth', 0.2)
-            .attr('width', 0.2)
-            .attr('color', function (d) {return colScale(d.fitness0)})
+            .attr('height', 0.02)
+            .attr('depth', 0.02)
+            .attr('width', 0.02)
+            .attr('color', function (d) {return colScale(d[fitnessCol])})
           }
+
+        // Change colors on scroll
+        var colorDim = 0
+        var colorChange = function() {
+            colorDim -= 0.5
+            if (colorDim < -5) {
+                colorDim = 5
+            }
+            var colorDimName = "fitness" + String(colorDim)
+            scene.selectAll('.data_point')
+                .attr('color', function(d) {return colScale(d[colorDimName])})
+        };
+        
+        if (dims == 4) {
+            scene.on("wheel", colorChange)
+        }
+
         
         }
     )
