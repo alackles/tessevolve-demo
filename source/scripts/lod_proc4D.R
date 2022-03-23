@@ -4,16 +4,22 @@ library(tidyr)
 proj_path <- "/home/acacia/Documents/research/project-viz-3D/"
 fnames_path <- paste(proj_path, "data/filenames.csv", sep="")
 rep_paths <- paste(proj_path, as.list(read.csv(fnames_path, header=F)),sep="")
-files <- paste(rep_paths, "lod_md.csv", sep="") %>% .[matches("D_4", vars=.)] # https://stackoverflow.com/questions/44169164/dplyr-filter-on-a-vector-rather-than-a-dataframe-in-r
+files <- paste(rep_paths, "lod_round.csv", sep="") 
 
 proc_4D <- function(fname) {
-  df <- read.csv(fname) %>%
-    pivot_wider(
-      names_from=x3, 
-      values_from=fitness,
-      names_prefix="fitness")
-  write.csv(x=df, file=fname, row.names = FALSE, quote = FALSE)
-  return(fname)
+  df <- read.csv(fname)
+  if (grepl("D_4", fname)) {
+    df <- df %>%
+      pivot_wider(
+        names_from=x3, 
+        values_from=fitness,
+        names_prefix="fitness"
+      )
+  } 
+  stripped_name <- unlist(strsplit(fname, split="_round.csv"))
+  outname <- paste0(stripped_name, ".csv")
+  write.csv(x=df, file=outname, row.names = FALSE, quote = FALSE)
+  return(outname)
 }
 
 lapply(files, proc_4D)
