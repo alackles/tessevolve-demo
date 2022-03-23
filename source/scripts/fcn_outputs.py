@@ -38,6 +38,7 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
     header = xcoords + ["fitness"]
 
     for fcn in functions:
+       
         fname = "./data/coords/coords_" + fcn.__name__ + "_" + str(dims) + "D.csv"
         fcoords = list(fcn_pts_dict[fcn.__name__])
         with open(fname, "w") as f:

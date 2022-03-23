@@ -54,25 +54,19 @@ def main():
         lodpath = dirpath + lodname 
 
         xcols = ["x" + str(d) for d in range(int(dim))]
-        rounding = {
-            "lo": 0.0,
-            "md": 0.5,
-            "hi": 0.25,
-        }
 
         df = pd.read_csv(lodpath)
-
-        for label, rnd in rounding.items():
-            df_round = df.copy()
-            roundname = "lod_" + label + ".csv"
-            roundpath = dirpath + roundname
-
-            for col in xcols:
-                df_round[col] = df_round[col].apply(round_nearest, args=(rnd,))
+        df_round = df.copy()
         
-            df_round = contract_df(df_round, xcols)
+        roundname = "lod_round.csv"
+        roundpath = dirpath + roundname
 
-            df_round.to_csv(roundpath, index=False)
+        for col in xcols:
+            df_round[col] = df_round[col].apply(round_nearest, args=(0.5,))
+    
+        df_round = contract_df(df_round, xcols)
+
+        df_round.to_csv(roundpath, index=False)
 
         print(dirpath)
 

@@ -34,7 +34,7 @@ def export_lod(lod, dims, lodpath="lod.csv"):
 def main():
 
     phyloname = "phylogeny_1000.csv"
-    lodname = "lod_full.csv"
+    lodname = "lod_init.csv"
 
     params = parameters()
 
