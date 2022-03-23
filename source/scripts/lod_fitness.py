@@ -15,8 +15,8 @@ def parse_line(line):
     ]  # get only the parts that are the actual input
 
 
-def eval_lod_fitness(path, lodname, fcn, precision=3):
-    fname = path + lodname
+def eval_lod_fitness(path, fcn, infile="lod_init.csv", outfile="lod_fit.csv", precision=3):
+    fname = path + infile
     with open(fname, "r") as f:
         header = f.readline().strip() + ",fitness\n"  # skip header and append fitness
         lines = f.readlines()  # get every line
@@ -28,7 +28,7 @@ def eval_lod_fitness(path, lodname, fcn, precision=3):
             else:
                 fitness = round(fcn(fcn_input), precision)
             lines[i] = line.strip() + "," + str(fitness) + "\n"
-    outname = path + "lod_fit.csv"
+    outname = path + outfile
     with open(outname, "w") as f:
         f.write(header)
         f.writelines(lines)
@@ -36,16 +36,14 @@ def eval_lod_fitness(path, lodname, fcn, precision=3):
 
 def main():
 
-    lodname = "lod_init.csv"
-
-    fcn_map = {"Shubert": shubert, "Vincent": vincent, "CF1": CF1, "CF2": CF2}
+    fcn_map = {"shubert": shubert, "vincent": vincent, "CF1": CF1, "CF2": CF2}
 
     params = parameters()
 
     for p in params:
         dirpath = p["path"]
         fcn = p["fcn"]
-        eval_lod_fitness(path=dirpath, lodname=lodname, fcn=fcn_map[fcn])
+        eval_lod_fitness(path=dirpath, fcn=fcn_map[fcn])
         print(dirpath)
 
 

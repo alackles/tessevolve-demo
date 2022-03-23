@@ -46,7 +46,7 @@ def contract_df(df, xcols):
  
 def main():
     params = parameters() 
-    lodname = "lod_full.csv"
+    lodname = "lod_fit.csv"
 
     for p in params:
         dirpath = p["path"]
