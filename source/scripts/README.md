@@ -14,6 +14,9 @@ At this point you should have:
 - data/reps/*/phylogeny_1000.csv : all replicate phylogenies
 
 - source/scripts/data/coords/*.csv : 2D, 3D, and 4D coordinates
+
+# 4D Coordinate Passthrough 
+1. `fcn_proc4D.R` : process coordinates for 4D
 # LOD Analysis
 1. `lod_gen.py` : generate initial LODs ("phylogeny_1000.csv" => "lod_init.csv")
 2. `lod_fitness.py` : add fitnesses to LODs ("lod_init.csv" => "lod_fit.csv")
