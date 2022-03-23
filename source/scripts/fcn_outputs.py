@@ -35,10 +35,10 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
     xcoords = ["x" + str(d) for d in range(dims)]
     if dims==2:
         xcoords.append("x2")
-    header = xcoords + ["fitness0"]
+    header = xcoords + ["fitness"]
 
     for fcn in functions:
-        fname = "../../data/coords_" + fcn.__name__ + "_" + str(dims) + "D.csv"
+        fname = "./data/coords/coords_" + fcn.__name__ + "_" + str(dims) + "D.csv"
         fcoords = list(fcn_pts_dict[fcn.__name__])
         with open(fname, "w") as f:
             fcn_writer = csv.writer(f, delimiter=",", quotechar='"')
@@ -58,4 +58,4 @@ def fcn_outputs(dims=3, n=21, precision=3, functions=[shubert, vincent, CF1, CF2
 
 fcn_outputs(dims=2)
 fcn_outputs(dims=3)
-#fcn_outputs(dims=4)
+fcn_outputs(dims=4)
