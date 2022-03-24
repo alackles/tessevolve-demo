@@ -268,8 +268,8 @@
 	</div>
 
   <!-- Make the scene that contains the actual data visualization -->
-  <div id="scene" background="color: white" fog="type: linear; color: white"> <!-- Scene rapped in div-->
-		<a-scene embedded>
+  <div id="scene"> <!-- Scene rapped in div-->
+		<a-scene embedded background="color: white" fog="type: linear; color: white; near: 1; far: 1000">
 
       <!-- Starter text -->
       <a-entity id="defaultText" position="0 1.6 -10" text="width: 10; lineHeight: 200; color: black; value: Click draw button to display something here!"></a-entity>
