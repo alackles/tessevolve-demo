@@ -115,7 +115,7 @@ var load_landscape = function() {
         // Draw Nodes
         if (phylo_detail !== "0") {
 
-          const meshline_param = 'lineWidth: 20; path: ' + edges + '; color: #000'
+          const meshline_param = 'lineWidth: 2; path: ' + edges + '; color: #000'
           
           var nodes = scene.selectAll('a-box')
               .data(lod, function(d){return d.id})
