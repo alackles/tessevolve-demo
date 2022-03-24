@@ -36,7 +36,7 @@ def make_settings(param, mabepath):
 
   fcn_range = {
     "shubert": (-5, 5), 
-    "vincent": (0.25, 10.25), 
+    "vincent": (0.5, 10.5), 
     "CF1": (-5, 5), 
     "CF2": (-5, 5)
     }
