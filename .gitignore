@@ -5,8 +5,10 @@
 source/scripts/__pycache__/*
 source/scripts/pylandscapes/__pycache__/*
 
-# reps
-data/reps/
+# intermediate rep data
+data/reps/*/lod_*.csv
+data/reps/*/output.csv
+data/reps/*/phylogeny_1000.csv
 
 #demo
 demo/demo.zip
