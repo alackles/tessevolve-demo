@@ -7,11 +7,11 @@ var accessor = function(row) {
     for (col in row) {
         numeric_row[col] = +row[col];
     }
-    return numeric_row
+    return numeric_row;
 }
 
 var coords = function(x, y, z) {
-    return x + " " + y + " " + z
+    return x + " " + y + " " + z;
 }
 
 var reload = function() {
@@ -34,7 +34,7 @@ var reload = function() {
     }
 
     // Remove meshline
-    var phyloLine = document.getElementById('phyloLine')
+    var phyloLine = document.getElementById('phyloLine');
     if (phyloLine !== null) {
       phyloLine.parentNode.removeChild(phyloLine);
     }
@@ -49,25 +49,18 @@ var load_landscape = function() {
     var tourny = document.querySelector('select[name="tour_size"]').value;
     var phylo_detail = document.querySelector('select[name="phylo"]').value;
 
-    var basepath = "../../data/"
+    var basepath = "../../data/";
     var coord_data = basepath + "coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
-    var node_data = "";
-    if (phylo_detail !== "0") {
-        node_data = replicate_path + "lod.csv"
-    }
-    var edge_data = "";
-    if (phylo_detail !== "0") {
-        edge_data = replicate_path + "edges.csv"
-    }
-    replicate_path + "edges.csv"
+    var node_data =  replicate_path + "lod.csv";
+    var edge_data = replicate_path + "edge.csv";
 
-    var scene = d3.select('a-scene')
+    var scene = d3.select('a-scene');
 
     var d3_coord_data = d3.csv(coord_data, accessor);
     var d3_node_data = d3.csv(node_data, accessor);
-    var d3_edge_data = d3.text(edge_data)
+    var d3_edge_data = d3.text(edge_data);
 
     Promise.all([
         d3_coord_data,
@@ -77,28 +70,28 @@ var load_landscape = function() {
     ])
     .then(
         function(files) {
-        landscape = files[0]
-        lod = files[1]
-        edges = files[2]
-        dims = files[3]
+        landscape = files[0];
+        lod = files[1];
+        edges = files[2];
+        dims = files[3];
 
-        var fitnessCol = "fitness"
+        var fitnessCol = "fitness";
 
         if (dims == 4) {
-            fitnessCol = "fitness5"
+            fitnessCol = "fitness5";
         }
         
         // Set color scale 
         var set_min = function(fitnessCol) {
-            return d3.min(landscape, function(d) {return d[fitnessCol]})
+            return d3.min(landscape, function(d) {return d[fitnessCol]});
         };
 
         var set_max = function(fitnessCol) {
-            return d3.max(landscape, function(d) {return d[fitnessCol]})
+            return d3.max(landscape, function(d) {return d[fitnessCol]});
         };
 
         var colScale = d3.scaleSequential(d3.interpolatePlasma);
-        colScale.domain([set_min(fitnessCol), set_max(fitnessCol)])
+        colScale.domain([set_min(fitnessCol), set_max(fitnessCol)]);
 
         // Draw Points 
         var pts = scene.selectAll('a-sphere')
@@ -110,19 +103,19 @@ var load_landscape = function() {
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
             .attr('color', function (d) {return colScale(d[fitnessCol])})
             .attr('radius', 0.1)
-            .attr('opacity', 0.9)
+            .attr('opacity', 0.9);
         
         // Draw Nodes
         if (phylo_detail !== "0") {
 
-          const meshline_param = 'lineWidth: 2; path: ' + edges + '; color: #000'
+          const meshline_param = 'lineWidth: 2; path: ' + edges + '; color: #000';
           
           var nodes = scene.selectAll('a-box')
-              .data(lod, function(d){return d.id})
+              .data(lod, function(d){return d.id});
         
           var lod = scene.append('a-entity')
             .attr('id', "phyloLine")
-            .attr('meshline', meshline_param)
+            .attr('meshline', meshline_param);
         
           nodes.enter()
             .append('a-box')
@@ -131,23 +124,23 @@ var load_landscape = function() {
             .attr('height', 0.02)
             .attr('depth', 0.02)
             .attr('width', 0.02)
-            .attr('color', function (d) {return colScale(d[fitnessCol])})
+            .attr('color', function (d) {return colScale(d[fitnessCol])});
           }
 
         // Change colors on scroll
-        var colorDim = 0
+        var colorDim = 0;
         var colorChange = function() {
-            colorDim -= 0.5
+            colorDim -= 0.5;
             if (colorDim < -5) {
-                colorDim = 5
+                colorDim = 5;
             }
-            var colorDimName = "fitness" + String(colorDim)
+            var colorDimName = "fitness" + String(colorDim);
             scene.selectAll('.data_point')
-                .attr('color', function(d) {return colScale(d[colorDimName])})
+                .attr('color', function(d) {return colScale(d[colorDimName])});
         };
         
         if (dims == 4) {
-            scene.on("wheel", colorChange)
+            scene.on("wheel", colorChange);
         }
 
         
