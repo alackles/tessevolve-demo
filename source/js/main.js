@@ -55,11 +55,11 @@ var load_landscape = function() {
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
     var node_data = "";
     if (phylo_detail !== "0") {
-        node_data = replicate_path + "lod_" + phylo_detail + ".csv"
+        node_data = replicate_path + "lod.csv"
     }
     var edge_data = "";
     if (phylo_detail !== "0") {
-        edge_data = replicate_path + "edge_" + phylo_detail + ".csv"
+        edge_data = replicate_path + "edge.csv"
     }
     replicate_path + "edges.csv"
 
@@ -82,7 +82,11 @@ var load_landscape = function() {
         edges = files[2]
         dims = files[3]
 
-        var fitnessCol = "fitness0"
+        var fitnessCol = "fitness"
+
+        if (dims == 4) {
+            fitnessCol = "fitness5"
+        }
         
         // Set color scale 
         var set_min = function(fitnessCol) {
