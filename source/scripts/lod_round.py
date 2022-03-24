@@ -53,18 +53,14 @@ def main():
         dim = p["dim"]
         lodpath = dirpath + lodname 
 
-        xcols = ["x" + str(d) for d in range(int(dim))]
-
         df = pd.read_csv(lodpath)
         df_round = df.copy()
         
         roundname = "lod_round.csv"
         roundpath = dirpath + roundname
 
-        for col in xcols:
-            df_round[col] = df_round[col].apply(round_nearest, args=(0.5,))
-    
-        df_round = contract_df(df_round, xcols)
+        if (dim ==4):
+            df_round["x3"] = df_round["x3"].apply(round_nearest, args=(0.5,))
 
         df_round.to_csv(roundpath, index=False)
 
