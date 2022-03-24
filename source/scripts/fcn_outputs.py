@@ -14,7 +14,7 @@ def fcn_pts(dims=3, n=21, precision=3):
     shubert_range = cf1_range = cf2_range = np.round(
         np.linspace(start=-5, stop=5, num=n), precision
     )
-    vincent_range = np.round(np.linspace(start=0.25, stop=10.25, num=n), precision)
+    vincent_range = np.round(np.linspace(start=0.5, stop=10.5, num=n), precision)
 
     fcn_pts_dict = {
         "shubert": iter.product(shubert_range, repeat=dims),
