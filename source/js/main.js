@@ -108,7 +108,7 @@ var load_landscape = function() {
         // Draw Nodes
         if (phylo_detail !== "0") {
 
-          const meshline_param = 'lineWidth: 2; path: ' + edges + '; color: #000';
+          const meshline_param = 'lineWidth: 2; path: ' + edges + '; color: grey';
           
           var nodes = scene.selectAll('a-box')
               .data(lod, function(d){return d.id});
@@ -121,9 +121,9 @@ var load_landscape = function() {
             .append('a-box')
             .attr('class', 'phylo_node')
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
-            .attr('height', 0.02)
-            .attr('depth', 0.02)
-            .attr('width', 0.02)
+            .attr('height', 0.04)
+            .attr('depth', 0.04)
+            .attr('width', 0.04)
             .attr('color', function (d) {return colScale(d[fitnessCol])});
           }
 
