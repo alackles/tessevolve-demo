@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Most of this is taken from https://github.com/emilydolson/fitness_landscape_visualizations-->
 <head>
-  <title>Visualizing fitness landscapes in 3D</title>
+  <title>Tessevolve</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -44,7 +44,7 @@
 			<div class="row justify-content-between">
 				<!-- Title -->
 				<div class="col">
-					<h1>Visualizing fitness landscapes in 3D </h1>
+					<h1>Tessevolve: A platform for visualizing fitness landscapes up to 4D</h1>
 				</div>
 				<!-- Action buttons -->
 				<div class="col-auto">
@@ -75,16 +75,16 @@
 			</div>
 		</div>
 
-  		<!-- Page dsecription -->
+  	<!-- Page dsecription -->
 		<p>
 			<br>
-			This is a demo of 3D data visualization and exploration. 
-      To try out this demo, click the <span class="oi oi-cog align-self-middle"></span> <b>Settings</b> button and select some data to draw.
-      NOTE: Rendering takes a few seconds.
-      For more detailed info, click the <span class="oi oi-question-mark align-self-middle"></span> <b>FAQ</b> button to the right. 
+			Tessevolve (<i><b>tesse</b>ract</i> + <i>e<b>volve</b></i>) is a platform for 2D, 3D, and 4D data visualization and exploration. 
+      		To try it out, click the <span class="oi oi-cog align-self-middle"></span> <b>Settings</b> button and select some data to draw.
+      		NOTE: Rendering takes a few seconds. If you are viewing in 4D, use your mouse wheel to scroll through the additional dimensions.
+      		For more detailed info, click the <span class="oi oi-question-mark align-self-middle"></span> <b>FAQ</b> button to the right. 
 			<br><br>
-      Click the <span class="oi oi-eye align-self-middle"></span> <b>View</b> button to center the visualization in your web browser.
-			If you have a compatible device (e.g. Oculus VR headset), you can then click the <b>VR</b> button in the bottom right to enter VR interaction mode.  
+      		Click the <span class="oi oi-eye align-self-middle"></span> <b>View</b> button to center the visualization in your web browser.
+			If you have a compatible device (e.g. Oculus VR headset), you can then click the <b>VR</b> button in the bottom right to enter VR interaction mode. <i>If you are having trouble with frame rate rendering/stuttering, turn off the lineage viewer.</i>
 			<br><br>
 			Have fun! If you have questions or just want to talk about data visualization in VR, feel free to <a href="https://alackles.github.io/">contact me</a>!
 		</p>
@@ -189,16 +189,16 @@
 										<label class="input-group-text" for="rep"> Replicate to view: </label>
 									</div>
 									<select id="rep" class="form-select" name="rep">
-										<option value="00">1</option>
-										<option value="01">2</option>
-										<option value="02">3</option>
-										<option value="03">4</option>
-										<option value="04">5</option>
-										<option value="05">6</option>
-										<option value="06">7</option>
-										<option value="07">8</option>
-										<option value="08">9</option>
-										<option value="09">10</option>					                                                                  
+										<option value="10">1</option>
+										<option value="11">2</option>
+										<option value="12">3</option>
+										<option value="13">4</option>
+										<option value="14">5</option>
+										<option value="15">6</option>
+										<option value="16">7</option>
+										<option value="17">8</option>
+										<option value="18">9</option>
+										<option value="19">10</option>					                                                                  
 									</select>
 								</div>
 
@@ -233,29 +233,75 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-          <h4> More FAQ details to come.</h4>
-          <p>
-            Put more details here when they're ready
-          </p>
-          <h4> What tools did you use to build this? </h4>
+				<h4> What's the TL;DR?</h4>
+				<p>
+					This is a visualization of evolutionary fitness landscapes. 
+					You can view them in 2D, 3D, and 4D (but you'll have to scroll through in 4D).
+					The goal is for you to be able to understand and interpret 3D and 4D landscapes, which are difficult to show in flat images. 
+					I hope it helps!
+				</p>
+				<h4> What do the different elements of this visualization represent? </h4>
 					<p>
-					For full details, see <a href="https://github.com/alackles/project-viz-3D">the GitHub repo for this site</a>. In summary:
-					<li><a href="https://aframe.io/">A-Frame (v1.2.0)</a>: an open source and shockingly straightforward web framework for virtual reality. </li>
-					<li><a href="https://d3js.org/">D3.js (v7)</a>: an open source, easy-to-use JavaScript library for data-driven HTML, which was absolutely invaluable for programatically creating the landscapes you see. </li>
-					<li><a href="https://getbootstrap.com">Bootstrap (v5)</a>: an open source web framework to connect the front-end to the back-end, which I used to make this website. </li>
-					<li><a href="https://useiconic.com/open/">Open Iconic</a>: open source icons which I used for the buttons on this site. </li>
+						<b>Spheres</b> represent <i>points on the fitness landscape</i>. 
+						They are evenly spaced and discrete even though the landscape is continuous so that there is space to see between them when you are inside the visualization.
+						The color of a sphere represents its fitness, with warmer colors representing higher fitness. 
+						All colors are scaled to the <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">viridis plasma</a> color scale. 
+					</p>
+					<p>
+						<b>Boxes</b> represent <i>the birth of a new lineage</i>. 
+						In this case, there are many new lineages because mutation rates are arbitrarily high.
+						Like the points on the landscape, colors represent that lineage's fitness.
+					</p>
+					<p>
+						<b>Lines</b> represent sequential lineages. 
+						These are here as a visual aid to see how the lineage traverses the landscape.
+					</p>
+          		<h4> The 4D representation looks just like the 3D representation. Where's the 4th dimension?</h4>
+          			<p>
+          				Unfortunately, there's not a great way to represent 4D data to our 3D brains. 
+						So what you're seeing is actually 3D <i>slices</i> of the complete 4D object.
+						If you use your mouse wheel to <b>scroll</b>, the colors will change; this represents the fitness values for that 3D slice.
+						Scrolling through multiple slices should give you some intuition about how the 4th dimension interacts with the other 3.
+   	 	      		</p>
+
+				<h4> What about the 4D lineages? Those aren't moving; are they the same in each slice?</h4>
+					<p>
+						No, they aren't! The lines between nodes don't move, but the nodes themselves will change color as you scroll.
+						If they are saturated with color, those nodes are on that slice.
+						If they are greyed out and translucent, those nodes are on a different slice. 
+						Lines between nodes are displayed on all slices for simplicity and better rendering speed. 
 					</p>
 
-					<h4>Who else helped make this happen?</h4>
+				<h4> What about 5D? 6D? How high can you go?</h4>
+					<p>
+						That's a great question! 
+						As far as I know, this is the first visualization using VR of either 3D <i>or</i> 4D fitness landscapes, so it certainly isn't perfect. 
+						But we would love to push the envelope even further. 
+						One thing we want to do next is add <b>audio input</b> with the VR headset's built-in directional sound capabilities.
+						This might add another dimension, or might be a substitute for color for colorblind, low vision, or blind users of the software.
+						If you are interested in working with me on that extension, PLEASE contact me, particularly if you fit one of the descriptors above. 
+					</p>
+
+          		<h4> What tools did you use to build this? </h4>
+					<p>
+						For full details, see <a href="https://github.com/alackles/project-viz-3D">the GitHub repo for this site</a>. In summary:<br><br>
+						&ensp; <span class="oi oi-caret-right"></span> <a href="https://aframe.io/">A-Frame (v1.2.0)</a>: an open source and shockingly straightforward web framework for virtual reality. <br><br>
+						&ensp; <span class="oi oi-caret-right"></span> <a href="https://d3js.org/">D3.js (v7)</a>: an open source, easy-to-use JavaScript library for data-driven HTML, which was absolutely invaluable for programatically creating the landscapes you see. <br><br>
+						&ensp; <span class="oi oi-caret-right"></span> <a href="https://getbootstrap.com">Bootstrap (v5)</a>: an open source web framework to connect the front-end to the back-end, which I used to make this website. <br><br>
+						&ensp; <span class="oi oi-caret-right"></span> <a href="https://useiconic.com/open/">Open Iconic (v1.1.0)</a>: open source icons which I used for the buttons on this site. <br><br>
+						And my laptop running <a href="https://endeavouros.com/">EndeavourOS</a>. 
+					</p>
+
+				<h4>Who else helped make this happen?</h4>
 					<p>
 						This work builds directly on Emily Dolson's previous work on <a href="https://dl.acm.org/doi/pdf/10.1145/3205651.3208301">visualizing 2D landscapes in 3D</a>; the template for this website comes from <a href="https://emilydolson.github.io/fitness_landscape_visualizations/">her demo site</a> for that paper.
-            I'm additionally thankful to Charles Ofria, Clifford Bohm, and Vincent Ragusa for helpful discussions on this project.
+            			I'm additionally thankful to Charles Ofria, Clifford Bohm, and Vincent Ragusa for helpful discussions on this project.
 					</p>
 
-					<h4>Who are you?</h4>
+				<h4>Who are you?</h4>
 					<p>
-					I'm a PhD student creating methods and metrics to understand evolution at different scales. 
-          To learn more about me, see <a href="http://github.alackles.io"> my website</a>.
+						I'm a PhD student creating methods and metrics to understand evolution at different scales. 
+      	    			To learn more about me, see <a href="http://github.alackles.io"> my website</a>.
 					</p>
 	
 				</div>
