@@ -59,7 +59,7 @@ var load_landscape = function() {
     }
     var edge_data = "";
     if (phylo_detail !== "0") {
-        edge_data = replicate_path + "edge.csv"
+        edge_data = replicate_path + "edges.csv"
     }
     replicate_path + "edges.csv"
 
