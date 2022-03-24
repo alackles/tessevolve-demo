@@ -71,7 +71,7 @@ def make_settings(param, mabepath):
   settings.append('sys.snapshot_file_root_name=\\"' + reppath + 'phylogeny\\"')
   settings.append('sys.data_file_name=\\"' + reppath + 'phylogenetic_data.csv\\"')
 
-  return "\;".join(settings)
+  return "\;".join(settings) + "\;"
 
 def main():
 
