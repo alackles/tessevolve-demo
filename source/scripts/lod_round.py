@@ -59,9 +59,13 @@ def main():
         roundname = "lod_round.csv"
         roundpath = dirpath + roundname
 
-        if (dim == 4):
+        if (dim == 2):
+            df_cols = ["id", "x0", "x1", "x2", "fitness"]
+            df_round["x2"] = 0
+            df_round = df_round[df_cols]
+        elif (dim == 4):
             df_round["x3"] = df_round["x3"].apply(round_nearest, args=(0.5,))
-
+        
         df_round.to_csv(roundpath, index=False)
 
         print(dirpath)
