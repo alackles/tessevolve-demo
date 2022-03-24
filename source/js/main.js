@@ -50,7 +50,7 @@ var load_landscape = function() {
     var phylo_detail = document.querySelector('select[name="phylo"]').value;
 
     var basepath = "../../data/";
-    var coord_data = basepath + "coords_" + fcn + "_" + dim + "D.csv";
+    var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
     var node_data =  replicate_path + "lod.csv";
