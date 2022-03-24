@@ -50,7 +50,7 @@ def main():
 
     for p in params:
         dirpath = p["path"]
-        dim = p["dim"]
+        dim = int(p["dim"])
         lodpath = dirpath + lodname 
 
         df = pd.read_csv(lodpath)
@@ -59,7 +59,7 @@ def main():
         roundname = "lod_round.csv"
         roundpath = dirpath + roundname
 
-        if (dim ==4):
+        if (dim == 4):
             df_round["x3"] = df_round["x3"].apply(round_nearest, args=(0.5,))
 
         df_round.to_csv(roundpath, index=False)
