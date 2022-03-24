@@ -113,7 +113,7 @@ var load_landscape = function() {
           var nodes = scene.selectAll('a-box')
               .data(lod, function(d){return d.id});
         
-          var lod = scene.append('a-entity')
+          scene.append('a-entity')
             .attr('id', "phyloLine")
             .attr('meshline', meshline_param);
         
@@ -127,6 +127,15 @@ var load_landscape = function() {
             .attr('color', function (d) {return colScale(d[fitnessCol])});
           }
 
+        var colScaleNode = function(colorDimName) {
+            if (lod[colorDimName]) {
+                return ["pink", 1]
+            } else {
+                return ["grey", 0.5]
+            }
+        }
+        
+
         // Change colors on scroll
         var colorDim = 0;
         var colorChange = function() {
@@ -135,8 +144,13 @@ var load_landscape = function() {
                 colorDim = 5;
             }
             var colorDimName = "fitness" + String(colorDim);
+
             scene.selectAll('.data_point')
                 .attr('color', function(d) {return colScale(d[colorDimName])});
+
+            scene.selectAll('.phylo_node')
+                .attr('color', colScaleNode(colorDimName)[0])
+                .attr('opacity', colScaleNode(colorDimName)[1]);
         };
         
         if (dims == 4) {
