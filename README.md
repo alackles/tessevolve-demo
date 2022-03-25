@@ -1,2 +1,3 @@
-# project-viz-3D
-Visaulization of 3D fitness landscapes
+# Tessevolve
+
+Under construction! See website for details: https://alackles.github.io/tessevolve/
