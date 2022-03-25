@@ -242,6 +242,16 @@
 					The goal is for you to be able to understand and interpret 3D and 4D landscapes, which are difficult to show in flat images. 
 					I hope it helps!
 				</p>
+				<h4> I don't see anything. <h4>
+				<p>
+					Did you click the <span class="oi oi-cog align-self-middle"></span> <b>Settings</b> button and select some data, then click <span class="oi oi-brush"></span> <b>Draw</b>?
+				</p>
+				<h4> Yeah, I did all that, but I still don't see anything. <h4>
+				<p>
+					It takes a second to render, because A-Frame has to delete everything you see and put new stuff in its place.
+					Also, you might need to back up (WASD or arrow keys) or turn around; the landscapes don't always appear in front of you.
+					If you still see nothing, it's possible I accidentally broke something 😦. Please contact me at the link in the header if you keep having problems.
+				</p>
 				<h4> What do the different elements of this visualization represent? </h4>
 					<p>
 						<b>Spheres</b> represent <i>points on the fitness landscape</i>. 
@@ -284,9 +294,16 @@
 						If you are interested in working with me on that extension, PLEASE contact me, particularly if you fit one of the descriptors above. 
 					</p>
 
+				<h4> Where are these landscapes from? </h4>
+
+					<p>
+						The <a href="https://www.epitropakis.co.uk/gecco2021/">2021 GECCO niching competition</a>, with modifications by me to integrate the C++ versions of the landscapes into our digital evolution software and extend the landscapes you see here into 4D.
+					</p>
+
           		<h4> What tools did you use to build this? </h4>
 					<p>
 						For full details, see <a href="https://github.com/alackles/project-viz-3D">the GitHub repo for this site</a>. In summary:<br><br>
+						&ensp; <span class="oi oi-caret-right"></span> <a href="https://github.com/mercere99/MABE2"> MABE2 (pre-alpha)</a>: a heavily in-development digital evolution framework to evolve the phylogenies. <br><br>
 						&ensp; <span class="oi oi-caret-right"></span> <a href="https://aframe.io/">A-Frame (v1.2.0)</a>: an open source and shockingly straightforward web framework for virtual reality. <br><br>
 						&ensp; <span class="oi oi-caret-right"></span> <a href="https://d3js.org/">D3.js (v7)</a>: an open source, easy-to-use JavaScript library for data-driven HTML, which was absolutely invaluable for programatically creating the landscapes you see. <br><br>
 						&ensp; <span class="oi oi-caret-right"></span> <a href="https://getbootstrap.com">Bootstrap (v5)</a>: an open source web framework to connect the front-end to the back-end, which I used to make this website. <br><br>
