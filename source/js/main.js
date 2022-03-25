@@ -147,31 +147,19 @@ var load_landscape = function() {
         }
 
         // Change colors on scroll
-        var lastScrollTop = 0;
         var colorDim = 0;
         var colorChange = function() {
 
-            // detect scroll direction: from https://stackoverflow.com/questions/31223341/detecting-scroll-direction
-            var st = window.pageYOffset || document.documentElement.scrollTop; 
-            if (st > lastScrollTop) {
-                colorDim -= 0.5
-            } else {
-                colorDim += 0.5
-            }
-            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+            colorDim -= 0.5
 
             // Handle different ranges
             if (fcn == "vincent") {
                 if (colorDim < 0.5) {
                     colorDim = 10.5;
-                } else if (colorDim > 10.5) {
-                    colorDim = 0.5;
                 }
             } else {
                if (colorDim < -5) {
                     colorDim = 5;
-               } else if (colorDim > 5) {
-                    colorDim = -5;
                }
             }   
             
