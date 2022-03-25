@@ -106,7 +106,7 @@ var load_landscape = function() {
             .attr('position', function(d) {return coords(d.x0, d.x1, d.x2)})
             .attr('color', function (d) {return colScale(d[fitnessCol])})
             .attr('radius', 0.1)
-            .attr('opacity', 0.7);
+            .attr('opacity', 0.9);
         
         // Draw Nodes
         if (phylo_detail !== "0") {
