@@ -50,7 +50,7 @@ var load_landscape = function() {
     var phylo_detail = document.querySelector('select[name="phylo"]').value;
 
     var basepath = "../../tessevolve/data/"; // for web deployment
-    // var basepath = "../../data/" // for local host 
+    //var basepath = "../../data/" // for local host 
     var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
@@ -67,7 +67,8 @@ var load_landscape = function() {
         d3_coord_data,
         d3_node_data,
         d3_edge_data,
-        dim
+        dim,
+        fcn
     ])
     .then(
         function(files) {
@@ -75,6 +76,7 @@ var load_landscape = function() {
         lod = files[1];
         edges = files[2];
         dims = files[3];
+        fcn = files[4];
 
         var fitnessCol = "fitness";
 
@@ -128,37 +130,71 @@ var load_landscape = function() {
             .attr('color', function (d) {return colScale(d[fitnessCol])});
           }
 
-        var colScaleNode = function(colorDimName) {
-            if (lod[colorDimName]) {
-                return ["pink", 1]
+        var colScaleNode = function(d) {
+            if (typeof d == 'undefined' || isNaN(d)) {
+                return "grey"
             } else {
-                return ["grey", 0.5]
+                return colScale(d)
             }
         }
-        
+
+        var opScaleNode = function(d) {
+            if (typeof d == 'undefined' || isNaN(d)) {
+                return 0.5
+            } else {
+                return 1
+            }
+        }
 
         // Change colors on scroll
+        var lastScrollTop = 0;
         var colorDim = 0;
         var colorChange = function() {
-            colorDim -= 0.5;
-            if (colorDim < -5) {
-                colorDim = 5;
+
+            // detect scroll direction: from https://stackoverflow.com/questions/31223341/detecting-scroll-direction
+            var st = window.pageYOffset || document.documentElement.scrollTop; 
+            if (st > lastScrollTop) {
+                colorDim -= 0.5
+            } else {
+                colorDim += 0.5
             }
+            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+
+            // Decrement color dimension
+            colorDim -= 0.5;
+
+            // Handle different ranges
+            if (fcn == "vincent") {
+                if (colorDim < 0.5) {
+                    colorDim = 10.5;
+                } else if (colorDim > 10.5) {
+                    colorDim = 0.5;
+                }
+            } else {
+               if (colorDim < -5) {
+                    colorDim = 5;
+               } else if (colorDim > 5) {
+                    colorDim = -5;
+               }
+            }   
+            
+            // Set fitness column name
             var colorDimName = "fitness" + String(colorDim);
 
+            // Change points color
             scene.selectAll('.data_point')
                 .attr('color', function(d) {return colScale(d[colorDimName])});
 
+            // Change nodes color 
             scene.selectAll('.phylo_node')
-                .attr('color', colScaleNode(colorDimName)[0])
-                .attr('opacity', colScaleNode(colorDimName)[1]);
+                .attr('color', function(d) {return colScaleNode(d[colorDimName])})
+                .attr('opacity', function(d) {return opScaleNode(d[colorDimName])});
         };
         
         if (dims == 4) {
             scene.on("wheel", colorChange);
         }
 
-        
         }
     )
 
