@@ -1,7 +1,7 @@
 library(dplyr)
 library(tidyr)
 
-proj_path <- "/home/acacia/Documents/research/project-viz-3D/"
+proj_path <- "/home/acacia/Documents/research/tessevolve/"
 fnames_path <- paste(proj_path, "data/filenames.csv", sep="")
 rep_paths <- paste(proj_path, as.list(read.csv(fnames_path, header=F)),sep="")
 files <- paste(rep_paths, "lod_round.csv", sep="") 
