@@ -66,6 +66,7 @@ def make_settings(param, mabepath):
   settings.append('vals_org.min_value=\\"' + str(fcn_min) + '\\"')          # min function value
   settings.append('vals_org.max_value=\\"' + str(fcn_max) + '\\"')          # max function value
   settings.append('vals_org.mut_size=\\"' + mutrate + '\\"')       # mutation 'rate' (size)
+  settings.append('vals_org.mut_prob=\\"' + str(1) + '\\"')       # mutation 'prob' (always on)
 
   # SYSTEMATICS MANAGER
   settings.append('sys.snapshot_file_root_name=\\"' + reppath + 'phylogeny\\"')
