@@ -160,9 +160,6 @@ var load_landscape = function() {
             }
             lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 
-            // Decrement color dimension
-            colorDim -= 0.5;
-
             // Handle different ranges
             if (fcn == "vincent") {
                 if (colorDim < 0.5) {
