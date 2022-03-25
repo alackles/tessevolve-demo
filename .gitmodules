@@ -1,0 +1,4 @@
+[submodule "source/third-party/MABE2"]
+	path = source/third-party/MABE2
+	url = https://github.com/alackles/MABE2.git
+    branch = eval-GECCO
