@@ -62,29 +62,36 @@ var load_landscape = function() {
         var twoD = document.querySelector('input[name="2D"]');
         var threeD = document.querySelector('input[name="3D"]');
         var fourD = document.querySelector('input[name="4D"]');
-        var showLineage = document.querySelector('input[name="lineage"]').value;
-        var mut_rate = document.querySelector('select[id="mut_rate_slider"]').value;
-        var tourn_size = document.querySelector('select[id="tourn_size_slider"]').value;
-        var rep = document.querySelector('select[id="replicate"]').value;
+        var showLineage = document.querySelector('input[name="lineage"]');
+        var mut_rate = document.querySelector('input[id="mut_rate_slider"]').value;
+        var tourn_size = document.querySelector('input[id="tourn_size_slider"]').value;
+        var rep = document.querySelector('input[id="replicate"]').value;
 
         if(mut_rate == 1){
-            mut_rate = 0.0001;
+            mut_rate = "00001";
         } else if(mut_rate == 2){
-            mut_rate = 0.001;
+            mut_rate = "0001";
         } else if(mut_rate == 3){
-            mut_rate = 0.01;
+            mut_rate = "001";
         } else {
-            mut_rate = 0.1;
+            mut_rate = "01";
         }
 
         if(tourn_size == 1){
-            tourn_size = 2;
+            tourn_size = "02";
         } else if(tourn_size == 2){
-            tourn_size = 4;
+            tourn_size = "04";
         } else if(tourn_size == 3){
-            tourn_size = 8;
+            tourn_size = "08";
         } else {
             tourn_size = 16;
+        }
+
+        // check to see if show lineage is checked. if it is not, set to null
+        if(!showLineage){
+            showLineage = null;
+        } else {
+            showLineage = true;
         }
 
         tourny = tourn_size;
@@ -94,9 +101,9 @@ var load_landscape = function() {
 
         // these are not showing up?
         console.log("showLineage: " + showLineage);
-        console.log("showLineage: " + mut_rate);
-        console.log("showLineage: " + tourn_size);
-        console.log("showLineage: " + rep);
+        console.log("mut_rate: " + mut_rate);
+        console.log("tourn_size: " + tourn_size);
+        console.log("rep: " + rep);
 
         // create an if-statement to choose only one box for fcn
         if(CF1.checked && !CF2.checked && !shubert.checked && !vincent.checked){
@@ -125,8 +132,8 @@ var load_landscape = function() {
         }
     // end of my stuff -Lilia
 
-    var basepath = "../../tessevolve/data/"; // for web deployment
-    //var basepath = "../../data/" // for local host 
+    //var basepath = "../../tessevolve/data/"; // for web deployment
+    var basepath = "../../data/" // for local host 
     var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
