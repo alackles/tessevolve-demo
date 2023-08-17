@@ -132,8 +132,8 @@ var load_landscape = function() {
         }
     // end of my stuff -Lilia
 
-    //var basepath = "../../tessevolve/data/"; // for web deployment
-    var basepath = "../../data/" // for local host 
+    var basepath = "../../tessevolve/data/"; // for web deployment
+    //var basepath = "../../data/" // for local host 
     var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
@@ -268,7 +268,6 @@ var load_landscape = function() {
 }
 
 var draw = function() {
-    // draw circle
     console.log("Draw function called");
     reload();
     load_landscape();
