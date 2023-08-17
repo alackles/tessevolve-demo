@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Most of this is taken from https://github.com/emilydolson/fitness_landscape_visualizations-->
 <head>
-  <base href="/tessevolve/"> <!-- for deployment to gh pages -->
+  <!--<base href="/tessevolve/"> for deployment to gh pages -->
   
   <title>Tessevolve</title>
 	<meta charset="UTF-8">
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 
-  	<!-- Page dsecription -->
+  	<!-- Page description -->
 		<p>
 			<br>
 			Tessevolve (<i><b>tesse</b>ract</i> + <i>e<b>volve</b></i>) is a platform for 2D, 3D, and 4D data visualization and exploration. 
@@ -117,108 +117,79 @@
 						title="It's easiest to interpret these visualizations if you look at data from a single experimental treatment at a time. This control panel lets you select experimental treatments to view, and options for how you want the data displayed.">
 							Settings
 						</h3>	
-						
-						<!-- Data Selection column -->
-						<div class="row align-items-center">
+
+							<!--- begin my stuff --->
+							<!-- select data type(s) using checkboxes -->
 							<div class="col">
-									<h5>Data selection</h5>
-
-								<!-- Fitness landscape -->
-								<div class="input-group mb-3">
-									<div class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="left"
-									title="Which of the four fitness functions do you want to view data from?">
-										<label class="input-group-text" for="function"> Fitness landscape: </label>
-									</div>
-									<select id="function" class="form-select" name="function">
-										<option value="shubert">Shubert</option>
-										<option value="vincent">Vincent</option>
-										<option value="CF1" selected>Composition Function 1</option>
-										<option value="CF2">Composition Function 2</option>
-									</select>
-								</div>
-
-								<!-- Mutation rate -->
-								<div class="input-group mb-3" >
-									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
-									title="Mutations to x and y coordinates are chosen from a normal distribution. This number, scaled by the x and y domains of the function, determines the standard deviation of that function.">
-										<label class="input-group-text" for="mut_rate"> Mutation rate: </label>
-									</div>
-									<select id="mut_rate" class="form-select" name="mut_rate">
-										<option value="01">0.1</option>
-										<option value="001">0.01</option>
-										<option value="0001">0.001</option>
-										<option value="00001">0.0001</option>			
-									</select>
-								</div>
-
-								<!-- Tournament size -->
-								<div class="input-group mb-3" >
-									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
-									title="In tournament selection, a number of individuals are randomly chosen from the population and the one with the highest fitness reproduces. This variable determines the number of individuals in these groups.">
-										<label class="input-group-text" for="tour_size"> Tournament size: </label>
-									</div>
-									<select id="tour_size" class="form-select" name="tour_size">
-										<option value="02">2</option>
-										<option value="04">4</option>
-										<option value="08">8</option>
-										<option value="16">16</option>	
-									</select>
-								</div>														
-
+								<h5>Data Options</h5>
+							<label><input type="checkbox" name="CF1" class="author" value="CF1" checked="checked"
+							  title="Would you like to display data from Composition Function Data 1? This is the default data"/> CF1</label>
+							<label><input type="checkbox" name="CF2" class="author" value="CF2" checked="checked"
+							  title="Would you like to display data from Composition Function Data 2?"/> CF2</label>
+							<label><input type="checkbox" name="shubert" class="author" value="shubert" checked="checked"
+							  title="Would you like to display Shubert data?"/> Shubert</label>
+							<label><input type="checkbox" name="vincent" class="author" value="vincent" checked="checked"
+							  title="Would you like to display Vincent data?"/> Vincent</label>
 							</div> <!-- Closes column -->
+							<br> <!--- this adds a new line --->
 
-							<!-- Visualization options column-->
 							<div class="col">
-								<h5>Visualization options</h5>
-								
-								<!-- Dimensions -->
-								<div class="input-group mb-3" >
-									<div class="input-group-prepend" data-toggle="tooltip" data-placement="left"
-									title="We visualize 2D, 3D, and 4D landscapes with the same scheme so you can compare the visualization. Select how many dimensions you would like to see.">
-										<label class="input-group-text" for="dims"> Dimensions: </label>
-									</div>
-									<select id="dim" class="form-select" name="dim">
-										<option value="2">2D</option>
-										<option value="3" selected>3D</option>
-										<option value="4">4D</option>
-									</select>
-								</div>
-								            
-								<!-- Phylogeny detail level-->
-								<div class="input-group mb-3">
-									<div class="input-group-prepend" data-bs-toggle="tooltip" data-bs-placement="left"
-									title="Would you like to display lineage data?">
-										<label class="input-group-text" for="phylo"> Lineage Data </label>
-									</div>
-                  <!-- IN PROGRESS -->
-									<select id="phylo" class="form-select" name="phylo">
-										<option value="0">Landscape Only</option>
-									<!---	<option value="">Start/End Only</option> -->
-										<option value="full">Show Lineage</option>
-									</select>
-								</div>
+								<h5>Dimensions and Lineage Options</h5>
+							<!-- choose data dimension(s) using checkboxes -->
+							<label><input type="checkbox" name="2D" class="dimension" value="2D" checked="checked"
+							  title="Would you like to display 2D data?"/> 2D</label>
+							<label><input type="checkbox" name="3D" class="dimension" value="3D" checked="checked"
+							  title="Would you like to display 3D data?"/> 3D</label>
+							<label><input type="checkbox" name="4D" class="dimension" value="4D" checked="checked"
+							  title="Would you like to display 4D data?"/> 4D</label>
+							<br>
+							<br>
 
-								<!-- Replicate selector -->
-								<div class="input-group mb-3">
-									<div class="input-group-prepend" data-bs-toggle="tooltip" data-bs-placement="left"
-									title="Each condition has 10 replicates. Select the replicate number you want to view.">
-										<label class="input-group-text" for="rep"> Replicate to view: </label>
-									</div>
-									<select id="rep" class="form-select" name="rep">
-										<option value="10">1</option>
-										<option value="11">2</option>
-										<option value="12">3</option>
-										<option value="13">4</option>
-										<option value="14">5</option>
-										<option value="15">6</option>
-										<option value="16">7</option>
-										<option value="17">8</option>
-										<option value="18">9</option>
-										<option value="19">10</option>					                                                                  
-									</select>
-								</div>
-
+							<!-- decide whether to display lineage data using a checkbox-->
+							<label><input type="checkbox" name="lineage" class="lineage" value="showLineage" checked="checked"
+							  title="Would you like to display lineage data?"/> Show Lineage</label>
 							</div> <!-- Closes column -->
+							<br>
+							<br>
+
+							<!-- looked at code from here: https://blog.hubspot.com/website/html-slider for all three sliders-->
+
+							<!--- mut rate --->
+							<b>Mutation Rate Key:</b><br>
+							1: 0.0001
+							<br>
+							2: 0.001
+							<br>
+							3: 0.01
+							<br>
+							4: 0.1
+							<div class="slider"><label for="range">Mutation Rate: </label><input type="range" min="1" max="4" value="2" id="mut_rate_slider" step="1" list="mutRateToView"
+							  title="Mutations to x and y coordinates are chosen from a normal distribution. This number, scaled by the x and y domains of the function, determines the standard deviation of that function.">
+							  <datalist id="mutRateToView"><option>1</option><option>2</option><option>3</option><option>4</option></datalist></div> 
+							<br>
+
+							<!--- tourn size --->
+							<b>Tournament Size Key:</b><br>
+							1: 2^1
+							<br>
+							2: 2^2
+							<br>
+							3: 2^3
+							<br>
+							4: 2^4
+							<div class="slider"><label for="tourn">Tournament Size: </label><input type="range" min="1" max="4" value="2" id="tourn_size_slider" step="1" list="tournToView"
+							  title="In tournament selection, a number of individuals are randomly chosen from the population and the one with the highest fitness reproduces. This variable determines the number of individuals in these groups.">
+							  <datalist id="tournToView"><option>1</option><option>2</option><option>3</option><option>4</option></datalist></div> 
+							<br>
+
+							<!--- rep to view --->
+							<b>Replicate to View Scale: 1-10</b>
+							<br>
+							<div class="slider"><label for="replicate">Replicate to View: </label><input type="range" min="1" max="10" value="5" id="replicate" step="1" list="reptoview"
+							  title="Each condition has 10 replicates. Select the replicate number you want to view.">
+							  <datalist id="reptoview"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></datalist></div> 
+
+							  <!--- end of my stuff --->
 
 							<!-- Draw button -->
 							<div class="col center">
