@@ -41,16 +41,89 @@ var reload = function() {
 }
 
 var load_landscape = function() {
-    
-    var seed = document.querySelector('select[name="rep"]').value;
-    var fcn = document.querySelector('select[name="function"]').value;
-    var dim = document.querySelector('select[name="dim"]').value;
-    var mutrate = document.querySelector('select[name="mut_rate"]').value;
-    var tourny = document.querySelector('select[name="tour_size"]').value;
-    var phylo_detail = document.querySelector('select[name="phylo"]').value;
+    // start of my stuff -Lilia 
+    // *******************************************************************************************
+    var seed; var fcn; var dim; var mutrate; var tourny; var phylo_detail;
+
+        var CF1 = document.querySelector('input[name="CF1"]');
+        var CF2 = document.querySelector('input[name="CF2"]');
+        var shubert = document.querySelector('input[name="shubert"]');
+        var vincent = document.querySelector('input[name="vincent"]');
+        var twoD = document.querySelector('input[name="2D"]');
+        var threeD = document.querySelector('input[name="3D"]');
+        var fourD = document.querySelector('input[name="4D"]');
+        var showLineage = document.querySelector('input[name="lineage"]');
+        var mut_rate = document.querySelector('input[id="mut_rate_slider"]').value;
+        var tourn_size = document.querySelector('input[id="tourn_size_slider"]').value;
+        var rep = document.querySelector('input[id="replicate"]').value;
+
+        if(mut_rate == 1){
+            mut_rate = "00001";
+        } else if(mut_rate == 2){
+            mut_rate = "0001";
+        } else if(mut_rate == 3){
+            mut_rate = "001";
+        } else {
+            mut_rate = "01";
+        }
+
+        if(tourn_size == 1){
+            tourn_size = "02";
+        } else if(tourn_size == 2){
+            tourn_size = "04";
+        } else if(tourn_size == 3){
+            tourn_size = "08";
+        } else {
+            tourn_size = "16";
+        }
+
+        // check to see if show lineage is checked. if it is not, set to null
+        if(!showLineage){
+            showLineage = null;
+        } else {
+            showLineage = true;
+        }
+
+        tourny = tourn_size;
+        seed = rep;
+        mutrate = mut_rate;
+        phylo_detail = showLineage;
+
+        console.log("showLineage: " + showLineage);
+        console.log("mut_rate: " + mut_rate);
+        console.log("tourn_size: " + tourn_size);
+        console.log("rep: " + rep);
+
+        // create an if-statement to choose only one box for fcn
+        if(CF1.checked && !CF2.checked && !shubert.checked && !vincent.checked){
+            fcn = "CF1";
+        } else if (CF2.checked && !CF1.checked && !shubert.checked && !vincent.checked ){
+            fcn = "CF2";
+        } else if (shubert.checked && !CF2.checked && !CF1.checked && !vincent.checked ){
+            fcn = "shubert";
+        } else if (vincent.checked && !CF2.checked && !shubert.checked && !CF1.checked ){
+            fcn = "vincent";
+        } else {
+            // default to CF1
+            fcn = "CF1";
+        }
+
+        // create an if-statement to choose only one box for dim
+        if(twoD.checked && !threeD.checked && !fourD.checked){
+            dim = "2";
+        } else if (threeD.checked && !twoD.checked && !fourD.checked){
+            dim = "3";
+        } else if (fourD.checked && !threeD.checked && !twoD.checked){
+            dim = "4";
+        } else {
+            // default to 3D
+            dim = "3";
+        }
+    // end of my stuff -Lilia
+    //*******************************************************************************************
 
     var basepath = "../../tessevolve-demo/data/"; // for web deployment
-    //var basepath = "../../data/" // for local host 
+    // var basepath = "../../data/" // for local host 
     var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
@@ -181,11 +254,11 @@ var load_landscape = function() {
         }
 
         }
-    )
-
+    ) // end of then
 }
 
 var draw = function() {
-  reload();
-  load_landscape();
+    console.log("Draw function called");
+    reload();
+    load_landscape();
 }
