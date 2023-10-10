@@ -41,17 +41,6 @@ var reload = function() {
 }
 
 var load_landscape = function() {
-    
-    // look at the labels -> names
-    /*
-    var seed = document.querySelector('select[name="rep"]').value;
-    var fcn = document.querySelector('select[name="function"]').value;
-    var dim = document.querySelector('select[name="dim"]').value;
-    var mutrate = document.querySelector('select[name="mut_rate"]').value;
-    var tourny = document.querySelector('select[name="tour_size"]').value;
-    var phylo_detail = document.querySelector('select[name="phylo"]').value;
-    */
-
     // start of my stuff -Lilia 
     // *******************************************************************************************
     var seed; var fcn; var dim; var mutrate; var tourny; var phylo_detail;
