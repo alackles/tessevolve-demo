@@ -1,7 +1,7 @@
 library(dplyr)
 library(tidyr)
 
-proj_path <- "/home/acacia/Documents/research/tessevolve/"
+proj_path <- "/home/acacia/Documents/research/tessevolve-demo/"
 tempdata_path <-paste(proj_path, "source/scripts/data/coords/", sep="")
 data_path <- paste(proj_path, "data/coords/", sep="")
 

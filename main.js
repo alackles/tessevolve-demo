@@ -132,7 +132,7 @@ var load_landscape = function() {
         }
     // end of my stuff -Lilia
 
-    var basepath = "../../tessevolve/data/"; // for web deployment
+    var basepath = "../../tessevolve-demo/data/"; // for web deployment
     //var basepath = "../../data/" // for local host 
     var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
