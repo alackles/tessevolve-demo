@@ -134,7 +134,7 @@ var load_landscape = function() {
     //*******************************************************************************************
 
     var basepath = "../../tessevolve-demo/data/"; // for web deployment
-    var basepath = "../../data/" // for local host 
+    // var basepath = "../../data/" // for local host 
     var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
