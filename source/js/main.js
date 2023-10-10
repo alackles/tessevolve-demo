@@ -1,4 +1,4 @@
-// TODO: Vincent cmaera rig should be 25 25 25 
+// TODO: Vincent camera rig should be 25 25 25 
 
 // Standard accessor: 2D and 3D
 // https://stackoverflow.com/questions/25412046/d3js-working-with-unknown-headers-number-of-columns-number-of-rows
