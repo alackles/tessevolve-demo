@@ -52,7 +52,8 @@ var load_landscape = function() {
     var phylo_detail = document.querySelector('select[name="phylo"]').value;
     */
 
-    // start of my stuff -Lilia
+    // start of my stuff -Lilia 
+    // *******************************************************************************************
     var seed; var fcn; var dim; var mutrate; var tourny; var phylo_detail;
 
         var CF1 = document.querySelector('input[name="CF1"]');
@@ -84,7 +85,7 @@ var load_landscape = function() {
         } else if(tourn_size == 3){
             tourn_size = "08";
         } else {
-            tourn_size = 16;
+            tourn_size = "16";
         }
 
         // check to see if show lineage is checked. if it is not, set to null
@@ -99,7 +100,6 @@ var load_landscape = function() {
         mutrate = mut_rate;
         phylo_detail = showLineage;
 
-        // these are not showing up?
         console.log("showLineage: " + showLineage);
         console.log("mut_rate: " + mut_rate);
         console.log("tourn_size: " + tourn_size);
@@ -131,9 +131,10 @@ var load_landscape = function() {
             dim = "3";
         }
     // end of my stuff -Lilia
+    //*******************************************************************************************
 
     var basepath = "../../tessevolve-demo/data/"; // for web deployment
-    //var basepath = "../../data/" // for local host 
+    var basepath = "../../data/" // for local host 
     var coord_data = basepath + "coords/coords_" + fcn + "_" + dim + "D.csv";
 
     var replicate_path = basepath + "reps/SEED_" + seed + "__F_" + fcn + "__D_" + dim + "__MUT_" + mutrate + "__T_" + tourny + "/";
